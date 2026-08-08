@@ -1,0 +1,43 @@
+{
+  "name": "juzt",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Juzt — Gestoría y consultoría agronómica. Just productivity.",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@gsap/react": "2.1.2",
+    "@hookform/resolvers": "5.4.0",
+    "@react-three/drei": "10.7.7",
+    "@react-three/fiber": "9.6.1",
+    "clsx": "2.1.1",
+    "gsap": "3.15.0",
+    "lenis": "^1.1.13",
+    "next": "16.2.11",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-hook-form": "7.82.0",
+    "tailwind-merge": "3.3.1",
+    "three": "0.185.1",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "26.1.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "0.185.1",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.2.11",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3"
+  }
+}
