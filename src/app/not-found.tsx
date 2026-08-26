@@ -17,7 +17,7 @@ export default function NotFound() {
         <div className="absolute inset-0 bg-[linear-gradient(100deg,var(--color-bone)_25%,transparent_80%)]" />
       </div>
       <div className="container-edge">
-        <Link href="/" aria-label="Juzt · inicio">
+        <Link href="/" aria-label="JUZT · inicio">
           <Logo />
         </Link>
         <p className="mt-10 font-[family-name:var(--font-mono)] text-sm uppercase tracking-widest text-[var(--color-clay)]">
@@ -34,7 +34,7 @@ export default function NotFound() {
           <Button href="/" size="lg" variant="primary">
             Ir al inicio
           </Button>
-          <Button href="/#contacto" size="lg" variant="outline">
+          <Button href="/#contacto-footer" size="lg" variant="outline">
             Contactar
           </Button>
         </div>

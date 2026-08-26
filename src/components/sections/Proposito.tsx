@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { proposito, sectores } from "@/lib/content";
+import { audiencias, principios, proposito } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 
@@ -45,10 +45,19 @@ export function Proposito() {
           </Reveal>
 
           <Reveal className="purpose-sectors">
-            <p className="purpose-sectors-label">Sectores que atendemos</p>
+            <p className="purpose-sectors-label">A quién acompañamos</p>
             <ul className="purpose-sectors-list">
-              {sectores.map((s) => (
-                <li key={s}>{s}</li>
+              {audiencias.map((audiencia) => (
+                <li key={audiencia}>{audiencia}</li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal className="purpose-principles">
+            <p className="purpose-sectors-label">Principios que nos orientan</p>
+            <ul className="purpose-principles-list">
+              {principios.map((principio) => (
+                <li key={principio.title}>{principio.title}</li>
               ))}
             </ul>
           </Reveal>

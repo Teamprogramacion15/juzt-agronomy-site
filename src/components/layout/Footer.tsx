@@ -1,76 +1,72 @@
-import { site, contact, footerCopy, nav, social } from "@/lib/content";
+import Link from "next/link";
+import { contact, footerCopy, nav, site, social } from "@/lib/content";
+import { DeferredContactForm } from "@/components/sections/DeferredContactForm";
+import { Reveal } from "@/components/motion/Reveal";
 import { Logo } from "./Logo";
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--color-ink)] text-[var(--color-bone)]">
-      <div className="container-edge py-16">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <Logo tone="bone" />
-            <p className="mt-5 max-w-[48ch] text-[color-mix(in_srgb,var(--color-bone)_72%,transparent)]">
-              {footerCopy.mission}
-            </p>
-            <p className="mt-6 font-[family-name:var(--font-mono)] text-sm uppercase tracking-[0.2em] text-[var(--color-lime)]">
-              {site.tagline}
-            </p>
+    <footer id="contacto-footer" className="contact-footer">
+      <div className="section-shell">
+        <Reveal className="footer-invitation" stagger>
+          <div className="footer-invitation-copy" data-reveal-item>
+            <p className="micro-label">Hablemos de tu próximo proyecto</p>
+            <h2>Una buena idea necesita estructura para convertirse en resultado.</h2>
+            <a
+              href={contact.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-whatsapp"
+            >
+              Escribir por WhatsApp <span aria-hidden="true">↗</span>
+            </a>
           </div>
 
-          <nav aria-label="Pie de página" className="lg:col-span-3">
-            <h2 className="mb-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[color-mix(in_srgb,var(--color-bone)_55%,transparent)]">
-              Navegación
-            </h2>
-            <ul className="flex flex-col gap-2.5">
-              {nav.map((item) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    className="text-[color-mix(in_srgb,var(--color-bone)_80%,transparent)] transition-colors hover:text-[var(--color-bone)]"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="footer-form-card" data-reveal-item>
+            <p className="micro-label">Contacto directo</p>
+            <DeferredContactForm />
+          </div>
+        </Reveal>
+
+        <Reveal className="footer-directory" stagger staggerEach={0.08}>
+          <div className="footer-brand" data-reveal-item>
+            <Logo tone="bone" />
+            <p>{footerCopy.mission}</p>
+          </div>
+
+          <div data-reveal-item>
+            <h3>Contacto</h3>
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            <a href={`tel:${contact.phoneRaw}`}>{contact.phoneDisplay}</a>
+            <p>{contact.location}</p>
+          </div>
+
+          <nav aria-label="Pie de página" data-reveal-item>
+            <h3>Navegación</h3>
+            {nav.map((item) => (
+              <Link key={item.label} href={item.href}>{item.label}</Link>
+            ))}
+            <a href={contact.equipmentUrl} target="_blank" rel="noopener noreferrer">
+              Equipos e insumos ↗
+            </a>
           </nav>
 
-          <div className="lg:col-span-4">
-            <h2 className="mb-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[color-mix(in_srgb,var(--color-bone)_55%,transparent)]">
-              Contacto
-            </h2>
-            <ul className="flex flex-col gap-2.5 text-[color-mix(in_srgb,var(--color-bone)_80%,transparent)]">
-              <li>
-                <a href={`mailto:${contact.email}`} className="hover:text-[var(--color-bone)]">
-                  {contact.email}
-                </a>
-              </li>
-              <li>
-                <a href={`tel:${contact.phoneRaw}`} className="hover:text-[var(--color-bone)]">
-                  {contact.phoneDisplay}
-                </a>
-              </li>
-              <li>{contact.location}</li>
-            </ul>
-            <ul className="mt-4 flex gap-4">
-              {social.map((s) => (
-                <li key={s.label}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[color-mix(in_srgb,var(--color-bone)_80%,transparent)] underline decoration-[var(--color-clay)] underline-offset-4 hover:text-[var(--color-bone)]"
-                  >
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div data-reveal-item>
+            <h3>Redes</h3>
+            {social.map((item) => (
+              <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer">
+                {item.label}
+              </a>
+            ))}
           </div>
-        </div>
+        </Reveal>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-white/12 pt-6 text-sm text-[color-mix(in_srgb,var(--color-bone)_60%,transparent)] sm:flex-row sm:items-center sm:justify-between">
+        <div className="footer-legal">
           <p>{footerCopy.copyright}</p>
-          <p>{site.credit}</p>
+          <div>
+            <Link href="/privacidad">Privacidad y datos</Link>
+            <p>{site.credit}</p>
+          </div>
         </div>
       </div>
     </footer>

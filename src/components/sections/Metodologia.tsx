@@ -70,7 +70,7 @@ export function Metodologia() {
         <SectionHeading
           eyebrow={metodologia.eyebrow}
           title={metodologia.title}
-          intro="Del dato al resultado: un método claro para que cada etapa aporte valor y quede documentada."
+          intro={metodologia.intro}
         />
 
         <div className="relative mt-16 pl-9">
@@ -101,6 +101,9 @@ export function Metodologia() {
                 </h3>
                 <p className="mt-2 max-w-[52ch] text-[var(--color-ink-soft)]">
                   {step.body}
+                </p>
+                <p className="mt-3 max-w-[52ch] text-sm text-[var(--color-pine)]">
+                  <strong>Entregable:</strong> {step.deliverable}
                 </p>
               </li>
             ))}

@@ -22,16 +22,30 @@ export function organizationJsonLd() {
     },
     address: {
       "@type": "PostalAddress",
+      addressLocality: site.locality,
       addressRegion: site.region,
       addressCountry: "CO",
     },
     knowsAbout: [
-      "Consultoría agronómica",
-      "Asistencia técnica agropecuaria",
-      "Gestoría agro",
-      "Estructuración de proyectos agroalimentarios",
-      "Gestión de inversión agro",
+      "Ejecución de proyectos rurales",
+      "Estructuración de proyectos agropecuarios",
+      "Gestión administrativa y de negocios",
+      "Planeación estratégica rural",
+      "Extensión agropecuaria",
+      "EPSEA",
     ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Líneas de proyectos JUZT",
+      itemListElement: [
+        "Ejecución y estructuración de proyectos",
+        "Gestión administrativa y de negocios",
+        "Consultoría técnica en planeación estratégica",
+      ].map((name) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name },
+      })),
+    },
     sameAs: social.map((s) => s.href),
   };
 }

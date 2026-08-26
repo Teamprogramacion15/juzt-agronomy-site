@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { site } from "@/lib/content";
 import { getSiteUrl, organizationJsonLd } from "@/lib/seo";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Preloader } from "@/components/motion/Preloader";
-import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { AnalyticsConsent } from "@/components/layout/AnalyticsConsent";
+import { WhatsAppFloating } from "@/components/layout/WhatsAppFloating";
 import "./globals.css";
 
 const hanken = Hanken_Grotesk({
@@ -22,12 +23,22 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  variable: "--font-cormorant",
+const pitagon = localFont({
+  src: [
+    {
+      path: "./fonts/PitagonSerif-Variable.ttf",
+      weight: "100 900",
+      style: "normal",
+    },
+    {
+      path: "./fonts/PitagonSerif-VariableItalic.ttf",
+      weight: "100 900",
+      style: "italic",
+    },
+  ],
+  variable: "--font-pitagon",
   display: "swap",
-  weight: "variable",
-  style: ["normal", "italic"],
+  fallback: ["Georgia", "serif"],
 });
 
 const siteUrl = getSiteUrl();
@@ -35,7 +46,7 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${site.name} — Gestoría y consultoría agronómica en Antioquia`,
+    default: `${site.name} — Proyectos y planeación estratégica rural`,
     template: `%s · ${site.name}`,
   },
   description: site.descriptionShort,
@@ -43,13 +54,13 @@ export const metadata: Metadata = {
   authors: [{ name: "Dínamo Publicidad" }],
   creator: "Dínamo Publicidad",
   keywords: [
-    "consultoría agronómica",
-    "acompañamiento productivo",
-    "gestoría agro",
-    "asistencia técnica agrícola",
-    "estructuración de proyectos productivos",
-    "consultoría agroindustrial",
-    "servicios agroalimentarios",
+    "estructuración de proyectos agropecuarios",
+    "ejecución de proyectos rurales",
+    "planeación estratégica rural",
+    "gestión administrativa agro",
+    "consultoría técnica agropecuaria",
+    "EPSEA",
+    "extensión agropecuaria",
     "Antioquia",
     "Colombia",
   ],
@@ -76,7 +87,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0c1338",
+  themeColor: "#192147",
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,
@@ -88,19 +99,19 @@ export default function RootLayout({
   return (
     <html
       lang="es-CO"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${hanken.variable} ${plexMono.variable} ${cormorant.variable}`}
+      className={`${hanken.variable} ${plexMono.variable} ${pitagon.variable}`}
     >
       <body>
         <a href="#contenido" className="skip-link">
           Saltar al contenido
         </a>
-        <Preloader />
         <Header />
-        <SmoothScroll>
-          <main id="contenido">{children}</main>
-          <Footer />
-        </SmoothScroll>
+        <main id="contenido">{children}</main>
+        <Footer />
+        <WhatsAppFloating />
+        <AnalyticsConsent />
         <script
           type="application/ld+json"
           // JSON-LD estático a partir de datos reales de la marca.

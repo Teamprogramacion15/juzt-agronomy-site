@@ -3,51 +3,32 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { servicios, epsea } from "@/lib/content";
+import { proyectos, epsea } from "@/lib/content";
 import { registerGsap, gsap } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
-type Service = (typeof servicios)[number];
-
-type ServiceScene = {
-  kicker: string;
-  title: string;
-  image: string;
-  imageAlt: string;
+type ProjectScene = (typeof proyectos)[number] & {
   tone: "light" | "dark";
   layerClass: string;
   reverse?: boolean;
-  items: readonly [Service, Service];
 };
 
-const serviceScenes: readonly ServiceScene[] = [
+const projectScenes: readonly ProjectScene[] = [
   {
-    kicker: "Estrategia y mercado",
-    title: "Gestión que ordena. Mercado que conecta.",
-    image: "/img/acompanamiento-campo.webp",
-    imageAlt: "Consultores recorriendo una unidad productiva en las montañas",
+    ...proyectos[0],
     tone: "light",
     layerClass: "service-panel-layer-1",
-    items: [servicios[0], servicios[1]],
   },
   {
-    kicker: "Proyecto y asistencia",
-    title: "Proyectos viables. Decisiones técnicas en campo.",
-    image: "/img/parcelas-aereas.webp",
-    imageAlt: "Vista aérea de parcelas y sistemas productivos agrícolas",
+    ...proyectos[1],
     tone: "dark",
     layerClass: "service-panel-layer-2",
     reverse: true,
-    items: [servicios[2], servicios[3]],
   },
   {
-    kicker: "Capital y oportunidades",
-    title: "Financiación e inversión para crecer con criterio.",
-    image: "/img/territorio-hero.webp",
-    imageAlt: "Territorio agrícola de montaña con cultivos y caminos rurales",
+    ...proyectos[2],
     tone: "light",
     layerClass: "service-panel-layer-3",
-    items: [servicios[4], servicios[5]],
   },
 ] as const;
 
@@ -274,23 +255,23 @@ export function Servicios() {
   return (
     <section
       ref={root}
-      id="servicios"
+      id="proyectos"
       className="services-story"
-      aria-labelledby="servicios-title"
+      aria-labelledby="proyectos-title"
     >
       <div data-services-intro className="services-intro">
         <div className="container-edge services-intro-layout">
           <div data-services-intro-copy className="services-intro-copy">
-            <h2 id="servicios-title" className="services-intro-title">
+            <h2 id="proyectos-title" className="services-intro-title">
               <span>Nuestros</span>
-              <em>servicios</em>
+              <em>proyectos</em>
             </h2>
             <div className="services-intro-description">
               <p>
-                <strong>Seis capacidades conectadas.</strong>
+                <strong>Tres líneas integradas.</strong>
                 <span>
-                  Una visión integral para ordenar, acompañar y hacer crecer
-                  cada proyecto agro con criterio técnico.
+                  Estructuramos, fortalecemos y acompañamos iniciativas que
+                  buscan resultados sostenibles en el territorio.
                 </span>
               </p>
             </div>
@@ -301,7 +282,7 @@ export function Servicios() {
             href="#servicios-panel-1"
             className="services-intro-cue"
           >
-            <span>Descubrir servicios</span>
+            <span>Descubrir proyectos</span>
             <span className="services-intro-cue-arrow" aria-hidden="true">
               ↓
             </span>
@@ -309,10 +290,10 @@ export function Servicios() {
         </div>
       </div>
 
-      {serviceScenes.map((scene, sceneIndex) => {
+      {projectScenes.map((scene, sceneIndex) => {
         return (
           <article
-            key={scene.kicker}
+            key={scene.id}
             id={`servicios-panel-${sceneIndex + 1}`}
             data-service-panel
             className={cn(
@@ -337,76 +318,31 @@ export function Servicios() {
                 />
                 <div className="service-media-shade" aria-hidden="true" />
                 <div className="service-media-caption">
-                  <span>Juzt</span>
-                  <span>Productividad aplicada</span>
+                  <span>JUZT · {scene.index}</span>
+                  <span>{scene.kicker}</span>
                 </div>
               </div>
 
               <div className="service-content">
                 <header data-service-copy className="service-scene-heading">
+                  <p className="service-scene-kicker">{scene.kicker}</p>
                   <h3 className="service-scene-title">
                     {scene.title}
                   </h3>
                 </header>
 
                 <div className="service-list">
-                  {scene.items.map((service) => (
-                    <section
-                      key={service.id}
-                      id={
-                        service.id === "gestoria-inversion"
-                          ? "oportunidades"
-                          : service.id
-                      }
-                      data-service-copy
-                      className="service-item"
-                    >
-                      <div className="service-item-copy">
-                        <h4>{service.title}</h4>
-                        <p className="service-item-summary">{service.summary}</p>
-                      </div>
+                  <section id={scene.id} data-service-copy className="service-item">
+                    <div className="service-item-copy">
+                      <p className="service-item-summary">{scene.summary}</p>
+                      <p className="service-item-detail">{scene.detail}</p>
+                    </div>
 
-                      <div
-                        className={cn(
-                          "service-quality-seal",
-                          service.sealVariant === "institutional" &&
-                            "service-quality-seal-institutional",
-                        )}
-                      >
-                        <div className="service-quality-seal-emblem">
-                          {service.sealVariant === "original" ? (
-                            <Image
-                              src={service.sealImage}
-                              alt={`Sello Juzt — ${service.title}`}
-                              width={601}
-                              height={624}
-                              sizes="6rem"
-                              className="service-quality-seal-image"
-                              quality={90}
-                            />
-                          ) : (
-                            <Image
-                              src={service.sealImage}
-                              alt=""
-                              width={330}
-                              height={196}
-                              className="service-quality-seal-logo"
-                              quality={90}
-                            />
-                          )}
-                        </div>
-
-                        <div className="service-quality-seal-copy">
-                          <span>
-                            {service.sealVariant === "original"
-                              ? "Sello oficial"
-                              : "Identidad institucional"}
-                          </span>
-                          <strong>{service.title}</strong>
-                        </div>
-                      </div>
-                    </section>
-                  ))}
+                    <div className="service-outcome">
+                      <span>Resultado esperado</span>
+                      <strong>{scene.outcome}</strong>
+                    </div>
+                  </section>
                 </div>
               </div>
             </div>
@@ -417,17 +353,18 @@ export function Servicios() {
       <div className="service-credential">
         <div className="container-edge service-credential-grid">
           <div className="service-credential-mark">
-            <p className="service-credential-label">Sello de calidad</p>
+            <p className="service-credential-label">Habilitación institucional</p>
             <p className="service-credential-code">{epsea.code}</p>
           </div>
 
           <div className="service-credential-copy">
             <h3>{epsea.title}</h3>
             <p>
-              Juzt está habilitada como <strong>{epsea.code}</strong> mediante
+              JUZT está habilitada como <strong>{epsea.code}</strong> mediante
               la <strong>Resolución {epsea.resolution}</strong> del{" "}
               {epsea.date} de la {epsea.agency} ({epsea.agencyShort}).
             </p>
+            <p>{epsea.body}</p>
           </div>
 
           <aside

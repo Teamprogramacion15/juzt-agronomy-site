@@ -1,18 +1,29 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import {
+  useRef,
+  type ComponentPropsWithoutRef,
+  type ReactNode,
+} from "react";
 import { useGSAP } from "@gsap/react";
 import { registerGsap, gsap } from "@/lib/gsap";
 
-type RevealProps = {
+type RevealProps = Omit<ComponentPropsWithoutRef<"div">, "children"> & {
   children: ReactNode;
-  className?: string;
   /** Retraso base en segundos. */
   delay?: number;
+  /** Desplazamiento horizontal inicial en px. */
+  x?: number;
   /** Desplazamiento vertical inicial en px. */
   y?: number;
+  /** Escala inicial. Debe permanecer muy cerca de 1. */
+  scale?: number;
+  /** Duración de la entrada en segundos. */
+  duration?: number;
   /** Anima los hijos con [data-reveal-item] de forma escalonada. */
   stagger?: boolean;
+  /** Intervalo entre elementos escalonados. */
+  staggerEach?: number;
 };
 
 /**
@@ -24,8 +35,13 @@ export function Reveal({
   children,
   className,
   delay = 0,
-  y = 24,
+  x = 0,
+  y = 20,
+  scale = 1,
+  duration = 0.82,
   stagger = false,
+  staggerEach = 0.07,
+  ...props
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -40,17 +56,25 @@ export function Reveal({
       // from() se auto-revierte al estado visible: nunca deja contenido oculto.
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const targets = stagger
-          ? el.querySelectorAll<HTMLElement>("[data-reveal-item]")
+          ? Array.from(el.querySelectorAll<HTMLElement>("[data-reveal-item]"))
           : [el];
+
+        if (!targets.length) return;
 
         gsap.from(targets, {
           opacity: 0,
+          x,
           y,
-          duration: 0.9,
+          scale,
+          duration,
           delay,
           ease: "power3.out",
-          stagger: stagger ? 0.08 : 0,
-          scrollTrigger: { trigger: el, start: "top 85%", once: true },
+          stagger: stagger ? staggerEach : 0,
+          willChange: "transform, opacity",
+          scrollTrigger: { trigger: el, start: "top 88%", once: true },
+          onComplete: () => {
+            gsap.set(targets, { clearProps: "transform,opacity,willChange" });
+          },
         });
       });
 
@@ -60,7 +84,13 @@ export function Reveal({
   );
 
   return (
-    <div ref={ref} className={className}>
+    <div
+      ref={ref}
+      className={className}
+      data-motion-reveal="true"
+      data-motion-stagger={stagger ? "true" : "false"}
+      {...props}
+    >
       {children}
     </div>
   );

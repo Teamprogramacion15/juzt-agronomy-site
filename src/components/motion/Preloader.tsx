@@ -101,7 +101,7 @@ export function Preloader() {
             data-pre-mark
             className="inline-block font-[family-name:var(--font-display)] text-5xl font-semibold text-[var(--color-bone)]"
           >
-            Juzt
+            JUZT
           </span>
           <span
             data-pre-dot

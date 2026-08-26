@@ -1,13 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-/**
- * Logotipo de Juzt.
- * - tone="ink" (fondos claros): logotipo oficial a color (/public/brand).
- * - tone="bone" (fondos oscuros): wordmark en colores de marca, porque el
- *   logotipo oficial tiene placa blanca y no funciona invertido sobre navy.
- *   → Cuando exista una versión blanca/vectorial del logo, usarla también aquí.
- */
+/** Variantes optimizadas del logotipo oficial entregado por JUZT. */
 export function Logo({
   className,
   tone = "ink",
@@ -19,23 +13,39 @@ export function Logo({
 }) {
   if (tone === "bone") {
     return (
-      <Image
-        src="/brand/logo_juzt_home.png"
-        alt=""
-        width={265}
-        height={86}
-        priority={priority}
-        className={cn("h-12 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)]", className)}
-      />
+      <span
+        role="img"
+        aria-label="JUZT — Gestión de productividad"
+        className={cn("logo-footer", className)}
+      >
+        <span className="logo-footer-mark" aria-hidden="true">
+          <Image
+            src="/brand/logo_juzt_home.png"
+            alt=""
+            width={265}
+            height={86}
+            sizes="72px"
+            priority={priority}
+            className="logo-footer-source"
+          />
+        </span>
+        <span className="logo-footer-divider" aria-hidden="true" />
+        <span className="logo-footer-descriptor" aria-hidden="true">
+          Gestión de
+          <br />
+          productividad
+        </span>
+      </span>
     );
   }
 
   return (
     <Image
       src="/brand/logo_juzt.png"
-      alt="Juzt — Gestión de productividad"
+      alt="JUZT — Gestión de productividad"
       width={364}
       height={115}
+      sizes="(max-width: 640px) 180px, 364px"
       priority={priority}
       className={cn("h-12 w-auto", className)}
     />

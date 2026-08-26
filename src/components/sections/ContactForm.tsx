@@ -200,9 +200,15 @@ export function ContactForm() {
             {...register("consent")}
           />
           <span>
-            Autorizo el tratamiento de mis datos personales conforme a la
-            política de tratamiento de datos (Ley 1581 de 2012), para ser
-            contactado por Juzt.
+            Autorizo a JUZT a tratar mis datos para responder esta solicitud,
+            conforme al{" "}
+            <a
+              href="/privacidad"
+              className="text-[var(--color-pine)] underline underline-offset-4"
+            >
+              aviso de privacidad y tratamiento de datos
+            </a>
+            .
           </span>
         </label>
         {errors.consent ? (

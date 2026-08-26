@@ -1,46 +1,39 @@
-import Image from "next/image";
-import { capacidades, originalHeroCopy } from "@/lib/content";
+import { diferenciales } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
 
-/** Capacidades y mensajes que estaban presentes en el home original. */
 export function CapacidadesBand() {
   return (
     <section
+      id="diferenciales"
       className="capabilities-band"
-      aria-labelledby="capacidades-title"
+      aria-labelledby="diferenciales-title"
     >
       <div className="container-edge">
         <div className="capabilities-layout">
           <Reveal className="capabilities-intro">
-            <p className="eyebrow capabilities-eyebrow">
-              La productividad se construye en equipo
-            </p>
-            <h2 id="capacidades-title" className="capabilities-title">
-              {originalHeroCopy.objective}
+            <p className="eyebrow capabilities-eyebrow">Por qué JUZT</p>
+            <h2 id="diferenciales-title" className="capabilities-title">
+              Cinco capacidades para avanzar con criterio y velocidad
             </h2>
             <p className="capabilities-copy">
-              {originalHeroCopy.relationships}
+              Una forma de trabajar que combina territorio, negocio, técnica y
+              relacionamiento.
             </p>
           </Reveal>
 
           <Reveal stagger className="capabilities-list">
-            {capacidades.map((capacidad) => (
-              <div
-                key={capacidad.title}
+            {diferenciales.map((diferencial, index) => (
+              <article
+                key={diferencial.title}
                 data-reveal-item
                 className="capability-card"
               >
-                <Image
-                  src={capacidad.image}
-                  alt=""
-                  width={90}
-                  height={90}
-                  className="capability-icon"
-                />
-                <p className="capability-name">
-                  {capacidad.title}
-                </p>
-              </div>
+                <span className="capability-index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="capability-name">{diferencial.title}</h3>
+                <p className="capability-body">{diferencial.body}</p>
+              </article>
             ))}
           </Reveal>
         </div>

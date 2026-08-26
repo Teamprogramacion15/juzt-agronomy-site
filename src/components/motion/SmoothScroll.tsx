@@ -52,9 +52,9 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {
         gsap.fromTo(
           el,
-          { yPercent: -8 },
+          { yPercent: -3 },
           {
-            yPercent: 8,
+            yPercent: 3,
             ease: "none",
             scrollTrigger: {
               trigger: el.parentElement ?? el,

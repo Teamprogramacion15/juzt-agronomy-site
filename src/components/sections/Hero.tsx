@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { registerGsap, gsap } from "@/lib/gsap";
-import { hero } from "@/lib/content";
+import { hero, impacto } from "@/lib/content";
 import { HeroVisual } from "@/components/three/HeroVisual";
 
 export function Hero() {
@@ -73,12 +73,14 @@ export function Hero() {
 
       <div className="container-edge hero-content relative z-10 flex w-full flex-1 flex-col">
         <div className="hero-editorial flex flex-1 flex-col justify-center">
-          <h1 className="sr-only">Juzt — Productividad agroalimentaria</h1>
+          <h1 className="sr-only">
+            JUZT — Ejecución de proyectos y planeación estratégica rural
+          </h1>
           <div id="hero-brand" data-testid="hero-logo" className="hero-brand overflow-hidden">
             <div data-hero-line className="hero-brand-motion">
               <Image
                 src="/brand/logo_juzt_hero_white.png"
-                alt="Juzt — Gestión de productividad"
+                alt="JUZT — Just productivity"
                 width={1983}
                 height={793}
                 priority
@@ -109,13 +111,21 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="container-edge hero-footer relative z-10 hidden items-center justify-end sm:flex">
+      <div className="container-edge hero-footer relative z-10 flex items-end justify-between gap-6">
+        <ul data-hero-fade className="hero-impact" aria-label="Impacto de JUZT">
+          {impacto.map((item) => (
+            <li key={item.label}>
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+            </li>
+          ))}
+        </ul>
         <a
-          href="#servicios"
+          href="#proyectos"
           data-hero-fade
-          className="hero-scroll hidden text-[color-mix(in_srgb,var(--color-bone)_58%,transparent)] sm:flex"
+          className="hero-scroll hidden text-[color-mix(in_srgb,var(--color-bone)_58%,transparent)] lg:flex"
         >
-          <span>Nuestros servicios</span>
+          <span>Nuestros proyectos</span>
           <span className="hero-scroll-line" aria-hidden="true" />
         </a>
       </div>

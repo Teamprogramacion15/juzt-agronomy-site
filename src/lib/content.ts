@@ -1,33 +1,34 @@
 /**
- * Fuente única de contenido de la marca Juzt.
+ * Fuente única de contenido de JUZT.
  *
- * Todo el texto proviene del sitio original (juzt.com.co) — reorganizado y
- * afinado, sin inventar clientes, cifras, certificaciones ni testimonios.
- * Si un dato no existe en la fuente, se marca como pendiente y NO se rellena
- * con contenido ficticio.
+ * Actualizada a partir de Respuestas_Web_JUZT_para_Dinamo_v2.docx.
+ * No se publican casos, testimonios, integrantes ni enlaces que la empresa
+ * todavía no haya entregado y autorizado.
  */
 
 export const site = {
-  name: "Juzt",
-  legalName: "Juzt",
+  name: "JUZT",
+  legalName: "JUZT",
+  nit: "901.767.156",
   tagline: "Just productivity",
   domain: "juzt.com.co",
   url: "https://juzt.com.co",
   descriptionShort:
-    "Gestoría y consultoría agronómica en Antioquia. Acompañamiento productivo, asistencia técnica y estructuración de proyectos para la cadena agroalimentaria.",
-  locality: "Antioquia",
+    "JUZT ejecuta y estructura proyectos, fortalece la gestión empresarial y acompaña la planeación estratégica de organizaciones rurales, empresas agro y entidades públicas y privadas en Colombia.",
+  locality: "La Ceja",
   region: "Antioquia",
   country: "Colombia",
   credit: "Diseño: Dínamo Publicidad",
 } as const;
 
 export const contact = {
-  email: "gerente@juzt.com.co",
-  phoneDisplay: "+57 300 247 8601",
-  phoneRaw: "+573002478601",
-  // Mismo número de contacto de la empresa; confirmar que tiene WhatsApp activo.
-  whatsapp: "https://wa.me/573002478601",
-  location: "Antioquia, Colombia",
+  email: "gerencia@juzt.com.co",
+  phoneDisplay: "+57 311 334 1341",
+  phoneRaw: "+573113341341",
+  whatsapp:
+    "https://wa.me/573113341341?text=Hola%20JUZT%2C%20quiero%20conversar%20sobre%20un%20proyecto.",
+  equipmentUrl: "https://juztmaquinaria.lovable.app/",
+  location: "La Ceja, Antioquia, Colombia",
 } as const;
 
 export const social = [
@@ -38,233 +39,175 @@ export const social = [
   },
   {
     label: "Facebook",
-    handle: "Juzt",
+    handle: "JUZT",
     href: "https://www.facebook.com/juzt.co?mibextid=LQQJ4d",
+  },
+  {
+    label: "LinkedIn",
+    handle: "Juzt Productividad",
+    href: "https://co.linkedin.com/company/juzt-productividad",
   },
 ] as const;
 
 export const nav = [
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Servicios", href: "#servicios" },
-  { label: "Nuestros Aliados", href: "#aliados" },
-  { label: "Oportunidades", href: "#oportunidades" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Inicio", href: "/" },
+  { label: "Nosotros", href: "/#nosotros" },
+  { label: "Proyectos", href: "/proyectos" },
+  { label: "Casos de éxito", href: "/casos-de-exito" },
+  { label: "Contacto", href: "#contacto-footer" },
 ] as const;
 
 export const hero = {
-  eyebrow: "Gestoría y consultoría agronómica · Antioquia",
-  // Titular específico — evita frases genéricas tipo "cultivamos el futuro".
-  titleLead: "Convertimos conocimiento técnico en",
-  titleEmphasis: "productividad agroalimentaria",
+  eyebrow: "Consultoría para el territorio",
+  title: "Convertimos oportunidades en resultados.",
   subtitle:
-    "Acompañamos a productores, asociaciones y empresas del sector agro con diagnóstico, gestión y ejecución. Decisiones técnicas que se traducen en resultados medibles.",
-  primaryCta: { label: "Hablar con un consultor", href: "#contacto" },
-  secondaryCta: { label: "Ver servicios", href: "#servicios" },
-  pills: [
-    "Consultoría especializada",
-    "Acompañamiento organizacional",
-    "Soluciones estratégicas",
-    "Profesionales calificados",
-  ],
+    "Estructuramos y ejecutamos proyectos estratégicos que fortalecen empresas, organizaciones y territorios.",
+  primaryCta: { label: "Hablemos de tu proyecto", href: contact.whatsapp },
+  secondaryCta: { label: "Conoce nuestros proyectos", href: "/proyectos" },
 } as const;
+
+export const impacto = [
+  { value: "37", label: "municipios atendidos" },
+  { value: "1.510", label: "personas impactadas" },
+  { value: "8", label: "proyectos ejecutados" },
+  { value: "21", label: "organizaciones acompañadas" },
+] as const;
 
 export const proposito = {
-  eyebrow: "Nuestro propósito",
-  title: "Una firma de gestoría agro enfocada en resultados justos y sostenibles",
+  eyebrow: "Quiénes somos",
+  title: "Estrategia, ejecución y conocimiento rural en una sola firma",
   body: [
-    "Somos una empresa de gestoría, acompañamiento productivo e inversión, con un grupo calificado de profesionales dispuesto a impactar positivamente mediante servicios justos, productivos y sostenibles.",
-    "Nos enfocamos en la consultoría especializada y el acompañamiento organizacional para entregar soluciones estratégicas que mejoran la eficiencia, la rentabilidad y la sostenibilidad, con estrategias innovadoras y de relacionamiento.",
+    "JUZT acompaña a organizaciones rurales, empresas agro y entidades públicas y privadas para convertir desafíos complejos en proyectos viables, negocios sostenibles y decisiones estratégicas.",
+    "Integramos criterio técnico, gestión empresarial y relacionamiento para que cada intervención avance del diagnóstico a la ejecución y deje capacidades instaladas en el territorio.",
   ],
 } as const;
 
-/** Diferenciales — provienen de "Nuestros Diferenciales". Sin cifras inventadas. */
 export const diferenciales = [
   {
-    title: "Experiencia profesional",
-    body: "Un equipo con criterio técnico y trayectoria en el sector agro, agroindustrial y agroalimentario.",
+    title: "Red estratégica",
+    body: "Articulamos actores públicos, privados y territoriales para movilizar conocimiento, oportunidades y recursos.",
   },
   {
-    title: "Equipo de consultores y gestores",
-    body: "Perfiles interdisciplinarios que acompañan cada etapa del proceso productivo.",
+    title: "Visión integral",
+    body: "Conectamos las dimensiones técnica, financiera, administrativa y humana de cada iniciativa.",
   },
   {
-    title: "Resultados escalables en esquemas asociativos",
-    body: "Modelos de trabajo que crecen con asociaciones y unidades productivas.",
+    title: "Soluciones completas",
+    body: "Acompañamos desde el diagnóstico y la estructuración hasta la ejecución y el seguimiento.",
   },
   {
-    title: "Relacionamiento estratégico",
-    body: "Conexiones que abren mercados, financiación y oportunidades reales de negocio.",
+    title: "Conocimiento rural",
+    body: "Entendemos el territorio, la asociatividad y las dinámicas de las cadenas agroalimentarias.",
   },
   {
-    title: "Innovación en productos y servicios",
-    body: "Soluciones aplicadas al contexto del productor y de la cadena agroalimentaria.",
-  },
-  {
-    title: "Sellos de calidad",
-    body: "Estándares que respaldan la gestión y la confianza en cada entrega.",
+    title: "Agilidad ejecutiva",
+    body: "Convertimos la estrategia en prioridades, responsables, indicadores y acciones concretas.",
   },
 ] as const;
 
-/**
- * Servicios — nombres y descripciones literales de juzt.com.co.
- * Los cinco primeros cuentan con un sello gráfico publicado por la marca.
- * Gestoría de inversión no tiene uno en la página original, por lo que el
- * rediseño la identifica con una placa institucional sin presentarla como una
- * certificación externa.
- */
-export const servicios = [
+export const proyectos = [
   {
-    id: "gestion-administrativa",
+    id: "estructuracion-ejecucion",
     index: "01",
-    sealImage: "/original/servicio-gestion.jpg",
-    sealVariant: "original",
-    title: "Gestión Administrativa y de negocios",
-    summary:
-      "Acompañamiento administrativo y asesoría integral en la gestión para el desarrollo empresarial y sostenibilidad económica.",
-  },
-  {
-    id: "comercializacion-agro",
-    index: "02",
-    sealImage: "/original/servicio-comercializacion.jpg",
-    sealVariant: "original",
-    title: "Comercialización de productos agro",
-    summary: "Línea de productos innovadores para el sector agropecuario.",
-  },
-  {
-    id: "estructuracion-proyectos",
-    index: "03",
-    sealImage: "/original/servicio-proyectos.jpg",
-    sealVariant: "original",
+    kicker: "Del concepto a la ejecución",
     title: "Ejecución y estructuración de proyectos",
     summary:
-      "Bancos de proyectos para impulsar las unidades de negocios y oportunidades del mercado.",
+      "Diseñamos, estructuramos y ejecutamos iniciativas productivas y territoriales con viabilidad técnica, financiera y operativa.",
+    detail:
+      "Organizamos objetivos, alcance, presupuesto, aliados, cronograma e indicadores para convertir una necesidad en un proyecto gestionable y medible.",
+    outcome: "Proyectos viables, articulados y listos para generar impacto.",
+    image: "/img/project-execution.jpeg",
+    imageAlt: "Equipo técnico evaluando un proyecto productivo en territorio",
   },
   {
-    id: "consultoria-tecnica",
-    index: "04",
-    sealImage: "/original/servicio-consultoria.jpg",
-    sealVariant: "original",
-    title: "Consultoría técnica integral",
+    id: "gestion-empresarial",
+    index: "02",
+    kicker: "Organizaciones sostenibles",
+    title: "Gestión administrativa y de negocios",
     summary:
-      "Asistencia técnica y acompañamiento estratégico por parte de un equipo interdisciplinario de profesionales.",
+      "Fortalecemos modelos empresariales, procesos administrativos y unidades de negocio para mejorar su sostenibilidad y rentabilidad.",
+    detail:
+      "Acompañamos la lectura financiera, la definición del propósito, la diversificación y la priorización de oportunidades con los equipos líderes.",
+    outcome: "Decisiones de negocio con estructura, foco y capacidad de ejecución.",
+    image: "/img/project-management.jpeg",
+    imageAlt: "Equipo de trabajo reunido alrededor de una mesa de gestión",
   },
   {
-    id: "soluciones-financieras",
-    index: "05",
-    sealImage: "/original/servicio-finanzas.jpg",
-    sealVariant: "original",
-    title: "Soluciones financieras",
+    id: "mentoria-estrategica",
+    index: "03",
+    kicker: "Decisiones con respaldo técnico",
+    title: "Consultoría técnica en planeación estratégica",
     summary:
-      "Gestionamos desde la estructuración y facilitamos la consecución de créditos agropecuarios.",
-  },
-  {
-    id: "gestoria-inversion",
-    index: "06",
-    sealImage: "/brand/logo_juzt_mark.png",
-    sealVariant: "institutional",
-    title: "Gestoría de inversión",
-    summary:
-      "Acceso a fondos de inversión y ángeles inversionista, con un listado de oportunidades de inversión.",
+      "Mentoría y acompañamiento para juntas directivas, gerencias, asociaciones de productores, cooperativas y entidades públicas.",
+    detail:
+      "Facilitamos conversaciones estratégicas, definimos indicadores y construimos planes de acción que alinean la dirección con la realidad productiva y territorial.",
+    outcome: "Gobierno, gestión y operación conectados por una ruta común.",
+    image: "/img/project-consulting.jpeg",
+    imageAlt: "Taller participativo de planeación estratégica con organizaciones rurales",
   },
 ] as const;
 
-/**
- * EPSEA — credencial institucional real, verificada en juzt.com.co:
- * habilitación mediante Resolución 048 del 1 de marzo de 2024 de la ADR.
- */
 export const epsea = {
   code: "EPSEA",
-  title: "Empresa prestadora de servicios agropecuarios",
+  title: "Habilitación para prestar servicios de extensión agropecuaria",
   resolution: "048",
-  date: "1 de marzo de 2024",
+  date: "01 de marzo de 2024",
   agency: "Agencia de Desarrollo Rural",
   agencyShort: "ADR",
+  body: "Esta habilitación respalda nuestra capacidad institucional para acompañar procesos de extensión agropecuaria con enfoque técnico, organizacional y territorial.",
 } as const;
 
-/**
- * Metodología — proceso derivado del lenguaje de la marca ("diagnóstico,
- * gestión, seguimiento y productividad"). Describe cómo trabaja Juzt; no
- * inventa entregables ni plazos específicos.
- */
 export const metodologia = {
-  eyebrow: "Cómo trabajamos",
-  title: "Un acompañamiento por etapas, del diagnóstico a la productividad",
+  eyebrow: "Nuestro método",
+  title: "Del diagnóstico a un plan que se puede ejecutar y medir",
+  intro:
+    "Cuatro fases conectan la realidad de la organización con decisiones, entregables y una ruta de ejecución.",
   steps: [
     {
       phase: "01",
-      title: "Diagnóstico",
-      body: "Entendemos el sistema productivo, sus datos y sus cuellos de botella antes de proponer.",
+      title: "Diagnóstico integral",
+      body: "Analizamos la situación técnica y financiera, incluidos ingresos, egresos y rentabilidad.",
+      deliverable: "Informe técnico de diagnóstico estratégico.",
     },
     {
       phase: "02",
-      title: "Gestión y estructuración",
-      body: "Definimos el plan, estructuramos proyectos y organizamos la gestión administrativa y financiera.",
+      title: "Propósito y modelo empresarial",
+      body: "Redefinimos el propósito, el modelo operativo y las alternativas de diversificación.",
+      deliverable: "Documento de propósito y líneas estratégicas de negocio.",
     },
     {
       phase: "03",
-      title: "Ejecución y acompañamiento",
-      body: "Acompañamos en campo con asistencia técnica y relacionamiento estratégico.",
+      title: "Cocreación de unidades de negocio",
+      body: "Trabajamos con líderes y asociados para idear, priorizar y validar oportunidades.",
+      deliverable: "Portafolio priorizado de unidades de negocio.",
     },
     {
       phase: "04",
-      title: "Seguimiento y resultados",
-      body: "Medimos, ajustamos y sostenemos la mejora en eficiencia, rentabilidad y sostenibilidad.",
+      title: "Indicadores y plan de acción",
+      body: "Definimos indicadores financieros, técnicos y de gestión, con hitos trimestrales.",
+      deliverable: "Tablero de indicadores y plan estratégico de ejecución.",
     },
   ],
 } as const;
 
-/** Principios — de "Nuestros Principios", redacción afinada. */
 export const principios = [
   {
-    title: "Vínculos de lealtad",
-    body: "Buscamos relaciones sólidas que dejen como resultado el bien común, empezando por el propio equipo de gestores.",
+    title: "Relaciones leales",
+    body: "Buscamos el bien común y construimos vínculos sólidos con equipos, aliados y territorios.",
   },
   {
-    title: "Prácticos y transparentes",
-    body: "Ponemos los panoramas de la gestoría sobre la mesa y nos anticipamos a los riesgos para una buena toma de decisiones.",
+    title: "Gestión práctica y transparente",
+    body: "Ponemos la información y los riesgos sobre la mesa para tomar mejores decisiones.",
   },
   {
-    title: "Social y humano",
-    body: "Creamos vínculos sanos y sociales, dando lo mejor de cada uno en cada acción.",
+    title: "Mirada social y humana",
+    body: "Reconocemos a las personas y sus capacidades como parte central de cada proceso.",
   },
   {
-    title: "Rentable consciente",
-    body: "«Just productivity»: equilibrar la eficiencia con la sostenibilidad organizacional.",
+    title: "Rentabilidad consciente",
+    body: "Equilibramos productividad, sostenibilidad organizacional e impacto territorial.",
   },
 ] as const;
-
-export const sectores = [
-  "Agropecuario",
-  "Agroindustrial",
-  "Agroalimentario",
-  "Esquemas asociativos",
-] as const;
-
-export const contactoCopy = {
-  eyebrow: "Contacto",
-  title: "Evaluemos su proyecto agro",
-  body: "Cuéntenos en qué está trabajando. Un consultor revisará su caso y le propondrá el siguiente paso.",
-} as const;
-
-export const footerCopy = {
-  mission:
-    "Servimos de herramienta para facilitar y agenciar procesos asociativos y empresariales, mediante gestoría y conexiones estratégicas para la cadena agroalimentaria.",
-  copyright: `Juzt © ${new Date().getFullYear()} · ${site.domain}`,
-} as const;
-
-/** Capacidades destacadas que aparecen en la página original. */
-export const capacidades = [
-  { title: "Consultoría especializada", image: "/original/icon-consultoria.png" },
-  { title: "Acompañamiento organizacional", image: "/original/icon-acompanamiento.png" },
-  { title: "Soluciones estratégicas", image: "/original/icon-soluciones.png" },
-  { title: "Estrategias innovadoras", image: "/original/icon-innovacion.png" },
-  { title: "Profesionales calificados", image: "/original/icon-profesionales.png" },
-] as const;
-
-export const originalHeroCopy = {
-  objective: "Acompañamiento productivo para alcanzar tus objetivos",
-  relationships: "Damos lo mejor de nosotros para crear relaciones sólidas",
-} as const;
 
 export const principiosImages = [
   "/original/principio-1.png",
@@ -273,9 +216,45 @@ export const principiosImages = [
   "/original/principio-4.png",
 ] as const;
 
+export const audiencias = [
+  "Organizaciones rurales",
+  "Empresas agro",
+  "Asociaciones y cooperativas",
+  "Entidades públicas y privadas",
+] as const;
+
+export const experiencia = {
+  eyebrow: "Experiencia comprobada",
+  title: "Capacidad de ejecución en territorio y articulación institucional",
+  body: "Nuestra experiencia conecta organizaciones rurales, empresas y entidades para llevar iniciativas estratégicas a resultados concretos.",
+  relationshipTitle: "Relacionamiento público y privado",
+  relationshipBody:
+    "Construimos puentes entre organizaciones productivas, aliados técnicos, empresas y entidades para fortalecer la viabilidad y el alcance de cada proyecto.",
+} as const;
+
+export const contactoCopy = {
+  eyebrow: "Hablemos",
+  title: "Convirtamos su desafío en un proyecto ejecutable",
+  body: "Cuéntenos qué necesita fortalecer, estructurar o poner en marcha. Revisaremos el contexto y definiremos el siguiente paso.",
+} as const;
+
+export const casosDeExito = {
+  eyebrow: "Casos de éxito",
+  title: "Resultados que merecen ser contados con evidencia.",
+  intro:
+    "JUZT ha ejecutado ocho proyectos y acompañado a veintiuna organizaciones. Los casos detallados y sus testimonios están en proceso de documentación y validación antes de publicarse.",
+  note:
+    "No publicamos nombres, testimonios ni resultados individuales sin autorización y soporte verificable.",
+} as const;
+
+export const footerCopy = {
+  mission:
+    "Estructuramos y ejecutamos proyectos, fortalecemos negocios y acompañamos decisiones estratégicas con conocimiento rural.",
+  copyright: `JUZT © 2026 · NIT ${site.nit}`,
+} as const;
+
 export const aliados = [
-  { name: "Infinite 1133", image: "/original/aliado-infinite1133.jpg" },
-  { name: "Tecnilas", image: "/original/aliado-tecnilas.jpg" },
+  { name: "Tecnilac Wilgo", image: "/original/aliado-tecnilas.jpg" },
   { name: "Alagro", image: "/original/aliado-alagro.jpg" },
   { name: "Coopsumerce", image: "/original/aliado-coopsumerce.jpg" },
   { name: "Prodepaz", image: "/original/aliado-prodepaz.jpg" },

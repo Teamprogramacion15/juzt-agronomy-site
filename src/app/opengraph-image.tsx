@@ -18,17 +18,17 @@ export default function OpengraphImage() {
           justifyContent: "space-between",
           padding: "80px",
           background:
-            "linear-gradient(135deg, #0c1338 0%, #182466 60%, #2c3c86 100%)",
-          color: "#f4f2ea",
+            "linear-gradient(135deg, #192147 0%, #192147 58%, #1c609b 100%)",
+          color: "#ffffff",
           fontFamily: "sans-serif",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <div style={{ fontSize: 40, fontWeight: 700, letterSpacing: -1 }}>
-            Juzt
+            JUZT
           </div>
           <div
-            style={{ width: 16, height: 16, borderRadius: 999, background: "#f3c73f" }}
+            style={{ width: 16, height: 16, borderRadius: 999, background: "#ededed" }}
           />
         </div>
 
@@ -41,10 +41,10 @@ export default function OpengraphImage() {
               maxWidth: 900,
             }}
           >
-            Convertimos conocimiento técnico en productividad agroalimentaria
+            Proyectos estratégicos con impacto real en el territorio
           </div>
-          <div style={{ fontSize: 30, color: "#f4d15f" }}>
-            Gestoría y consultoría agronómica · Antioquia, Colombia
+          <div style={{ fontSize: 30, color: "#ededed" }}>
+            Ejecución · Gestión empresarial · Planeación estratégica
           </div>
         </div>
 
@@ -55,7 +55,7 @@ export default function OpengraphImage() {
             fontSize: 26,
             textTransform: "uppercase",
             letterSpacing: 4,
-            color: "#f3c73f",
+            color: "#ffffff",
           }}
         >
           <span>Just productivity</span>
