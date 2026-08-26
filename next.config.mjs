@@ -9,8 +9,6 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
     qualities: [75, 90],
   },
-  // three / drei ship untranspiled ESM in a few subpaths; let Next transpile them.
-  transpilePackages: ["three"],
   async headers() {
     return [
       {
