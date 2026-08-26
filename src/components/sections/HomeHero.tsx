@@ -10,7 +10,7 @@ import {
 import { Reveal } from "@/components/motion/Reveal";
 import { hero } from "@/lib/content";
 
-const SLIDE_DURATIONS = [9_500, 10_500] as const;
+const SLIDE_DURATIONS = [5_000, 5_000] as const;
 
 function LaunchMark() {
   return (
