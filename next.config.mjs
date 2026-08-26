@@ -7,7 +7,7 @@ const nextConfig = {
   turbopack: { root: import.meta.dirname },
   images: {
     formats: ["image/avif", "image/webp"],
-    qualities: [75, 90],
+    qualities: [75, 90, 100],
   },
   async headers() {
     return [

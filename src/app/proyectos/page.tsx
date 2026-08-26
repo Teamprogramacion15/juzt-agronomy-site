@@ -47,6 +47,7 @@ export default function ProyectosPage() {
                   alt={project.imageAlt}
                   fill
                   sizes="(max-width: 899px) 100vw, 48vw"
+                  quality={90}
                   loading={index === 0 ? "eager" : "lazy"}
                   fetchPriority={index === 0 ? "high" : "auto"}
                   data-parallax

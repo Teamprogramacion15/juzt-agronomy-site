@@ -24,6 +24,7 @@ export default function HomePage() {
                 alt="Planta joven sostenida por manos en un contexto agrícola"
                 fill
                 sizes="(max-width: 899px) 100vw, 38vw"
+                quality={90}
                 data-parallax
               />
             </div>
@@ -65,6 +66,7 @@ export default function HomePage() {
                     alt={project.imageAlt}
                     fill
                     sizes="(max-width: 767px) 100vw, 33vw"
+                    quality={90}
                   />
                   <span>{project.index}</span>
                 </div>

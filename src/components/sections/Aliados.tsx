@@ -42,6 +42,7 @@ export function Aliados() {
                         alt={isDuplicate ? "" : aliado.name}
                         width={250}
                         height={100}
+                        quality={100}
                         className="allies-logo"
                       />
                     </li>

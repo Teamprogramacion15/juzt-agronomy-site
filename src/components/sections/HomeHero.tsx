@@ -154,7 +154,7 @@ export function HomeHero() {
                     fill
                     className="hero-territory-photo"
                     sizes="(max-width: 899px) 92vw, 47vw"
-                    quality={90}
+                    quality={100}
                     loading="eager"
                     fetchPriority="high"
                   />
@@ -192,6 +192,7 @@ export function HomeHero() {
                   height={793}
                   className="hero-brand-backdrop"
                   sizes="(max-width: 899px) 92vw, 47vw"
+                  quality={100}
                   aria-hidden="true"
                 />
                 <div className="hero-person-composite">
@@ -202,7 +203,7 @@ export function HomeHero() {
                     height={1492}
                     className="hero-person"
                     sizes="(max-width: 899px) 78vw, 34vw"
-                    quality={90}
+                    quality={100}
                     preload
                   />
                 </div>
@@ -224,7 +225,7 @@ export function HomeHero() {
                   fill
                   sizes="(max-width: 899px) 92vw, 48vw"
                   className="equipment-collage-image"
-                  quality={90}
+                  quality={100}
                   loading="eager"
                 />
               </div>

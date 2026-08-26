@@ -25,6 +25,7 @@ export function Logo({
             width={265}
             height={86}
             sizes="72px"
+            quality={100}
             priority={priority}
             className="logo-footer-source"
           />
@@ -46,6 +47,7 @@ export function Logo({
       width={364}
       height={115}
       sizes="(max-width: 640px) 180px, 364px"
+      quality={100}
       priority={priority}
       className={cn("h-12 w-auto", className)}
     />
