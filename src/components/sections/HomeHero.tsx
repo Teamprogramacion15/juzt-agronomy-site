@@ -149,7 +149,7 @@ export function HomeHero() {
               >
                 <div className="hero-territory-layer" aria-hidden="true">
                   <Image
-                    src="/img/hero-territory-hq.png"
+                    src="/img/hero-territory-hq.webp"
                     alt=""
                     fill
                     className="hero-territory-photo"
@@ -186,7 +186,7 @@ export function HomeHero() {
                   />
                 </svg>
                 <Image
-                  src="/brand/logo_juzt_hero_white.png"
+                  src="/brand/logo_juzt_hero_white.webp"
                   alt=""
                   width={1983}
                   height={793}
@@ -196,7 +196,7 @@ export function HomeHero() {
                 />
                 <div className="hero-person-composite">
                   <Image
-                    src="/img/hero-person-integrated.png"
+                    src="/img/hero-person-integrated.webp"
                     alt="Profesional de JUZT"
                     width={1054}
                     height={1492}
@@ -219,7 +219,7 @@ export function HomeHero() {
             <div className="equipment-collage">
               <div className="equipment-collage-frame">
                 <Image
-                  src="/img/hero-equipos-integrated-v2.png"
+                  src="/img/hero-equipos-integrated-v2.webp"
                   alt="Motoazada, ahoyador, biotrituradora y transporter de JUZT integrados en terrazas de territorio"
                   fill
                   sizes="(max-width: 899px) 92vw, 48vw"
