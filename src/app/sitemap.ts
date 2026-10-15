@@ -22,6 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    ...["nosotros", "equipos-e-insumos", "gestion-financiera"].map((route) => ({
+      url: `${base}/${route}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     {
       url: `${base}/privacidad`,
       lastModified: new Date(),

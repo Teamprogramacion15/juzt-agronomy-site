@@ -5,26 +5,12 @@ import Link from "next/link";
 import {
   useEffect,
   useState,
-  type CSSProperties,
+  useRef,
 } from "react";
-import { Reveal } from "@/components/motion/Reveal";
 import { hero } from "@/lib/content";
+import equipmentStyles from "./EquipmentHero.module.css";
 
-const SLIDE_DURATIONS = [5_000, 5_000] as const;
-
-function LaunchMark() {
-  return (
-    <span className="hero-launch-mark" aria-hidden="true">
-      <span className="hero-launch-track">
-        {[0, 1].map((item) => (
-          <svg key={item} viewBox="0 0 16 16" focusable="false">
-            <path d="M4 12 12 4M6 4h6v6" />
-          </svg>
-        ))}
-      </span>
-    </span>
-  );
-}
+const SLIDE_DURATIONS = [8_000, 8_000] as const;
 
 function SliderArrow({ direction }: { direction: "previous" | "next" }) {
   return (
@@ -42,10 +28,16 @@ function SliderArrow({ direction }: { direction: "previous" | "next" }) {
 export function HomeHero() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [cycle, setCycle] = useState(0);
-  const [userPaused, setUserPaused] = useState(false);
   const [interactionPaused, setInteractionPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const paused = userPaused || interactionPaused || reducedMotion;
+  const [imageReady, setImageReady] = useState(false);
+  const heroImageRef = useRef<HTMLImageElement>(null);
+  const paused = interactionPaused || reducedMotion;
+
+  useEffect(() => {
+    const image = heroImageRef.current;
+    if (image?.complete && image.naturalWidth > 0) setImageReady(true);
+  }, []);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -76,10 +68,6 @@ export function HomeHero() {
     setActiveSlide((nextSlide + 2) % 2);
     setCycle((current) => current + 1);
   };
-
-  const progressStyle = {
-    "--hero-slide-duration": `${SLIDE_DURATIONS[activeSlide]}ms`,
-  } as CSSProperties;
 
   return (
     <section
@@ -112,15 +100,15 @@ export function HomeHero() {
         >
           <div className="section-shell hero-editorial">
             <div className="hero-main">
-              <Reveal className="hero-copy" stagger y={18} duration={0.78}>
+              <div className="hero-copy">
                 <h1 aria-label={hero.title}>
-                  <span data-reveal-item>Convertimos</span>
-                  <span data-reveal-item>oportunidades</span>
-                  <em data-reveal-item>en resultados.</em>
+                  <span>Convertimos</span>
+                  <strong>oportunidades</strong>
+                  <strong>en resultados</strong>
                 </h1>
 
-                <p className="hero-lede" data-reveal-item>{hero.subtitle}</p>
-                <div className="hero-links" data-reveal-item>
+                <p className="hero-lede">{hero.subtitle}</p>
+                <div className="hero-links">
                   <a
                     href={hero.primaryCta.href}
                     className="text-link text-link-primary"
@@ -128,86 +116,36 @@ export function HomeHero() {
                     rel="noopener noreferrer"
                     tabIndex={activeSlide === 0 ? 0 : -1}
                   >
-                    {hero.primaryCta.label} <LaunchMark />
+                    {hero.primaryCta.label} <span className="hero-cta-arrow" aria-hidden="true">→</span>
                   </a>
                   <Link
                     href={hero.secondaryCta.href}
                     className="text-link"
                     tabIndex={activeSlide === 0 ? 0 : -1}
                   >
-                    {hero.secondaryCta.label} <LaunchMark />
+                    {hero.secondaryCta.label}
                   </Link>
                 </div>
-              </Reveal>
+              </div>
 
-              <Reveal
-                className="hero-visual"
-                y={0}
-                scale={0.985}
-                delay={0.08}
-                duration={1}
-              >
-                <div className="hero-territory-layer" aria-hidden="true">
-                  <Image
-                    src="/img/hero-territory-hq.webp"
-                    alt=""
-                    fill
-                    className="hero-territory-photo"
-                    sizes="(max-width: 899px) 92vw, 47vw"
-                    quality={100}
-                    loading="eager"
-                    fetchPriority="high"
-                  />
-                </div>
-                <svg
-                  className="hero-visual-field"
-                  viewBox="0 0 720 760"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  <defs>
-                    <radialGradient id="hero-field-light" cx="0.72" cy="0.18" r="0.66">
-                      <stop offset="0" stopColor="#ffffff" stopOpacity="0.18" />
-                      <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
-                    </radialGradient>
-                  </defs>
-                  <path
-                    className="hero-field-surface"
-                    d="M106 20C64 54 40 112 30 184C20 260 44 326 24 400C2 482 20 592 70 670C98 714 142 738 198 736L664 724C694 723 716 698 716 668V68C716 34 689 14 655 16C540 24 469 44 375 26C272 6 175-8 106 20Z"
-                    fill="transparent"
-                  />
-                  <path
-                    d="M106 20C64 54 40 112 30 184C20 260 44 326 24 400C2 482 20 592 70 670C98 714 142 738 198 736L664 724C694 723 716 698 716 668V68C716 34 689 14 655 16C540 24 469 44 375 26C272 6 175-8 106 20Z"
-                    fill="url(#hero-field-light)"
-                  />
-                  <path
-                    className="hero-field-outline"
-                    d="M122 52C84 83 62 132 54 194C45 263 67 326 48 404C29 480 45 573 88 640C113 679 151 701 201 700L646 690C665 690 680 674 680 654V86C680 66 664 52 643 53C534 61 464 79 372 61C273 42 184 28 122 52Z"
-                  />
-                </svg>
+              {/* The framed photo waits for its pixels, so its entrance is never half over when it appears. */}
+              <div className="hero-visual" data-image-ready={imageReady}>
+                <noscript>
+                  <style>{".hero-reference-person{animation:none!important}"}</style>
+                </noscript>
                 <Image
-                  src="/brand/logo_juzt_hero_white.webp"
-                  alt=""
-                  width={1983}
-                  height={793}
-                  className="hero-brand-backdrop"
-                  sizes="(max-width: 899px) 92vw, 47vw"
+                  ref={heroImageRef}
+                  onLoad={() => setImageReady(true)}
+                  src="/img/home-slide-1-field.webp"
+                  alt="Equipo de JUZT junto a productores rurales en una jornada de campo"
+                  width={1909}
+                  height={1441}
+                  className="hero-reference-person"
+                  sizes="(max-width: 899px) 90vw, 52vw"
                   quality={100}
-                  aria-hidden="true"
+                  preload
                 />
-                <div className="hero-person-composite">
-                  <Image
-                    src="/img/hero-person-integrated.webp"
-                    alt="Profesional de JUZT"
-                    width={1054}
-                    height={1492}
-                    className="hero-person"
-                    sizes="(max-width: 899px) 78vw, 34vw"
-                    quality={100}
-                    preload
-                  />
-                </div>
-              </Reveal>
+              </div>
             </div>
           </div>
         </div>
@@ -216,40 +154,44 @@ export function HomeHero() {
           className={`hero-slide hero-slide-equipment ${activeSlide === 1 ? "is-active" : "is-inactive"}`}
           aria-hidden={activeSlide !== 1}
         >
-          <div className="section-shell equipment-hero">
-            <div className="equipment-collage">
-              <div className="equipment-collage-frame">
+          <div className={equipmentStyles.slide}>
+            <div className={equipmentStyles.composition}>
+              <div className={equipmentStyles.scene}>
                 <Image
-                  src="/img/hero-equipos-integrated-v2.webp"
-                  alt="Motoazada, ahoyador, biotrituradora y transporter de JUZT integrados en terrazas de territorio"
+                  src="/img/home-slide-2-equipment.webp"
+                  alt="Trabajadores usando un transporter, una motoazada y un ahoyador en el campo"
                   fill
-                  sizes="(max-width: 899px) 92vw, 48vw"
-                  className="equipment-collage-image"
-                  quality={100}
+                  sizes="(max-width: 699px) 100vw, 55vw"
+                  className={equipmentStyles.sceneImage}
+                  unoptimized
                   loading="eager"
+                  fetchPriority="low"
                 />
-              </div>
             </div>
 
-            <div className="equipment-copy">
-              <h2>
-                <span>Equipos que ponen</span>
-                <span>la productividad</span>
-                <em>en movimiento.</em>
+            <div className={equipmentStyles.copy}>
+              <div className={equipmentStyles.logo}>
+                <Image src="/brand/logo_juzt.png" alt="JUZT" width={364} height={115} sizes="20vw" />
+              </div>
+              <h2 className={equipmentStyles.heading}>
+                <span className={equipmentStyles.firstLine}>Equipos <span>que ponen la</span></span>
+                <span>productividad</span>
+                <span className={equipmentStyles.blueLine}>en movimiento</span>
               </h2>
-              <p>
-                Maquinaria seleccionada para trabajar el territorio con respaldo,
-                asesoría y cobertura nacional.
+              <p className={equipmentStyles.description}>
+                Maquinaria seleccionada para trabajar el territorio con<br className={equipmentStyles.desktopBreak} />
+                <strong> respaldo, asesoría y cobertura nacional.</strong>
               </p>
               <a
                 href="https://juztmaquinaria.lovable.app/"
-                className="text-link equipment-store-link"
+                className={equipmentStyles.catalogLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 tabIndex={activeSlide === 1 ? 0 : -1}
               >
-                Conoce el catálogo <LaunchMark />
+                Conoce nuestro catálogo <span aria-hidden="true">→</span>
               </a>
+            </div>
             </div>
           </div>
         </div>
@@ -263,44 +205,6 @@ export function HomeHero() {
           aria-label="Ver slide anterior"
         >
           <SliderArrow direction="previous" />
-        </button>
-
-        <div className="hero-slider-dots" style={progressStyle}>
-          {["Consultoría", "Equipos e insumos"].map((label, index) => (
-            <button
-              key={label}
-              type="button"
-              className={activeSlide === index ? "is-active" : undefined}
-              onClick={() => goToSlide(index)}
-              aria-label={`Ver slide ${index + 1}: ${label}`}
-              aria-current={activeSlide === index ? "true" : undefined}
-            >
-              <span className="hero-slider-dot-track" aria-hidden="true">
-                {activeSlide === index && (
-                  <span
-                    key={`${activeSlide}-${cycle}`}
-                    className="hero-slider-dot-progress"
-                    data-paused={paused ? "true" : "false"}
-                  />
-                )}
-              </span>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-            </button>
-          ))}
-        </div>
-
-        <button
-          type="button"
-          className="hero-slider-pause"
-          onClick={() => setUserPaused((current) => !current)}
-          aria-label={userPaused ? "Reanudar presentación" : "Pausar presentación"}
-          aria-pressed={userPaused}
-        >
-          {userPaused ? (
-            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 5 7 5-7 5Z" /></svg>
-          ) : (
-            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10" /></svg>
-          )}
         </button>
 
         <button

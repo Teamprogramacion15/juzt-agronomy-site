@@ -1,0 +1,12 @@
+tmp/
+test-results/
+playwright-report/
+.codex-tmp/
+.codex/
+.codex-preview/
+.claude/
+legacy/
+*.log
+*.tsbuildinfo
+.env
+.env*.local

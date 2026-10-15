@@ -1,17 +1,57 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { contact } from "@/lib/content";
 import { useEffect, useRef, useState } from "react";
-import { contact, nav } from "@/lib/content";
-import { Logo } from "./Logo";
+
+const homeNav = [
+  { label: "Inicio", href: "/" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Proyectos", href: "/proyectos" },
+  { label: "Casos de éxito", href: "/casos-de-exito" },
+  { label: "Equipos e insumos", href: contact.equipmentUrl },
+  { label: "Contactos", href: "#contacto-footer" },
+] as const;
 
 export function Header() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    // Warm the mobile menu too, without competing with the initial render.
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    if (connection?.saveData) return;
+    const warmRoutes = () => {
+      for (const item of homeNav) {
+        if (item.href.startsWith("/") && item.href !== pathname) router.prefetch(item.href);
+      }
+      router.prefetch("/gestion-financiera");
+      router.prefetch("/equipos-e-insumos");
+    };
+    if (typeof window.requestIdleCallback === "function") {
+      const idle = window.requestIdleCallback(warmRoutes, { timeout: 2000 });
+      return () => window.cancelIdleCallback(idle);
+    }
+    const timeout = window.setTimeout(warmRoutes, 500);
+    return () => window.clearTimeout(timeout);
+  }, [pathname, router]);
+
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const previousScrollY = useRef(0);
+  const menuRef = useRef<HTMLDetailsElement>(null);
+  const closeMenu = () => {
+    if (menuRef.current) menuRef.current.open = false;
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => setOpen(Boolean(menuRef.current?.open)));
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     let frame = 0;
@@ -61,7 +101,10 @@ export function Header() {
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const close = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        if (menuRef.current) menuRef.current.open = false;
+        setOpen(false);
+      }
     };
     window.addEventListener("keydown", close);
     return () => {
@@ -75,24 +118,28 @@ export function Header() {
 
   return (
     <header
-      className="site-header"
+      className="site-header site-header-home"
       data-scrolled={scrolled ? "true" : "false"}
       data-hidden={hidden ? "true" : "false"}
       onFocusCapture={() => setHidden(false)}
     >
       <div className="site-header-inner">
         <Link href="/" className="site-logo" aria-label="JUZT · inicio">
-          <Logo priority />
+          <Image
+              src="/brand/home-reference-logo.png"
+              alt="JUZT — Gestión de productividad"
+              width={264}
+              height={189}
+              priority
+              className="home-reference-logo"
+            />
         </Link>
 
-        <nav className="desktop-nav" aria-label="Principal">
+        <nav className="home-reference-nav" aria-label="Principal">
           <ul>
-            {nav.map((item) => (
+            {homeNav.map((item) => (
               <li key={item.label}>
-                <Link
-                  href={item.href}
-                  aria-current={isCurrent(item.href) ? "page" : undefined}
-                >
+                <Link href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>
                   {item.label}
                 </Link>
               </li>
@@ -100,67 +147,45 @@ export function Header() {
           </ul>
         </nav>
 
-        <a
-          className="header-equipment"
-          href={contact.equipmentUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Equipos e insumos <span aria-hidden="true">↗</span>
-        </a>
+      </div>
 
-        <button
-          type="button"
+      <details ref={menuRef} className="mobile-menu" onToggle={(event) => {
+        setOpen(event.currentTarget.open);
+        setHidden(false);
+      }}>
+        <summary
+          role="button"
           className="menu-toggle"
-          aria-expanded={open}
           aria-controls="mobile-navigation"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
-          onClick={() => {
-            setHidden(false);
-            setOpen((value) => !value);
-          }}
         >
           <span />
           <span />
-        </button>
-      </div>
+        </summary>
 
       <div
         id="mobile-navigation"
         className="mobile-navigation"
         data-open={open ? "true" : "false"}
-        aria-hidden={!open}
       >
         <nav aria-label="Móvil">
           <ul>
-            {nav.map((item, index) => (
+            {homeNav.map((item, index) => (
               <li key={item.label}>
                 <Link
-                  href={item.href}
-                  tabIndex={open ? 0 : -1}
-                  onClick={() => setOpen(false)}
-                >
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  {item.label}
-                </Link>
+                    href={item.href}
+                    onClick={closeMenu}
+                  >
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    {item.label}
+                  </Link>
               </li>
             ))}
-            <li>
-              <a
-                href={contact.equipmentUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                tabIndex={open ? 0 : -1}
-                onClick={() => setOpen(false)}
-              >
-                <span>06</span>
-                Equipos e insumos ↗
-              </a>
-            </li>
           </ul>
         </nav>
         <p>Consultoría, estrategia y ejecución para el territorio.</p>
       </div>
+      </details>
     </header>
   );
 }

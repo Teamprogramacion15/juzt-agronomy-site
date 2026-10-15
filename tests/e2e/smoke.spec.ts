@@ -14,15 +14,17 @@ test.describe("Nueva arquitectura JUZT 2026", () => {
         name: /convertimos oportunidades en resultados/i,
       }),
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: "Proyectos", exact: true }).first()).toHaveAttribute(
+    const mobileMenu = page.getByRole("button", { name: "Abrir menú" });
+    if (await mobileMenu.isVisible()) await mobileMenu.click();
+    await expect(page.getByRole("link", { name: /^(?:\d{2} )?Proyectos$/ }).first()).toHaveAttribute(
       "href",
       "/proyectos",
     );
-    await expect(page.getByRole("link", { name: "Nosotros", exact: true }).first()).toHaveAttribute(
+    await expect(page.getByRole("link", { name: /^(?:\d{2} )?Nosotros$/ }).first()).toHaveAttribute(
       "href",
-      "/#nosotros",
+      "/nosotros",
     );
-    await expect(page.getByRole("link", { name: "Casos de éxito", exact: true }).first()).toHaveAttribute(
+    await expect(page.getByRole("link", { name: /^(?:\d{2} )?Casos de éxito$/ }).first()).toHaveAttribute(
       "href",
       "/casos-de-exito",
     );
@@ -31,12 +33,16 @@ test.describe("Nueva arquitectura JUZT 2026", () => {
       "https://juztmaquinaria.lovable.app/",
     );
 
-    if ((page.viewportSize()?.width ?? 0) >= 900) {
-      const equipment = page.locator(".header-equipment");
-      await expect(equipment).toHaveCSS("background-color", "rgb(28, 96, 155)");
-      await equipment.hover();
-      await expect(equipment).toHaveCSS("background-color", "rgb(28, 96, 155)");
-      await expect(equipment).not.toHaveCSS("transform", "none");
+    await expect(page.locator(".site-header")).toHaveCSS("background-color", "rgb(25, 33, 71)");
+    if ((page.viewportSize()?.width ?? 0) >= 1152) {
+      await expect(page.locator(".home-reference-nav a")).toHaveText([
+        "Inicio",
+        "Nosotros",
+        "Proyectos",
+        "Casos de éxito",
+        "Equipos e insumos",
+        "Contactos",
+      ]);
     }
   });
 
@@ -59,370 +65,240 @@ test.describe("Nueva arquitectura JUZT 2026", () => {
   test("mantiene la portada modular y la evidencia principal", async ({ page }) => {
     await page.goto("/");
 
-    const impact = page.locator(".impact-strip");
-    await expect(impact.locator("li")).toHaveCount(4);
-    await expect(impact).toHaveAttribute("data-visible", "true");
-    await expect(impact.locator(".impact-number-frame strong")).toHaveText([
-      "37",
-      "1.510",
-      "8",
-      "21",
-    ]);
-    await expect(impact.getByText(/cifras de impacto/i)).toHaveCount(0);
-    await expect(impact.getByText(/impacto medible/i)).toHaveCount(0);
-    await expect(impact.getByText(/evidencia acumulada/i)).toHaveCount(0);
-    await expect(impact.locator(".impact-ledger-rail")).toHaveCount(0);
-    await expect(impact.locator(".impact-metric-index")).toHaveCount(0);
-    await expect(impact.locator(".impact-map")).toHaveCount(0);
-    expect(
-      await impact.locator(".impact-number-frame").first().evaluate(
-        (element) => getComputedStyle(element, "::after").content,
-      ),
-    ).toBe("none");
     const epsea = page.locator(".epsea-section");
     await expect(epsea).toBeVisible();
+    await expect(epsea).toHaveCount(1);
+    await expect(epsea.getByRole("heading", { name: "EPSEA" })).toBeVisible();
+    await expect(epsea).toContainText("Entidad Prestadora del Servicio de Extensión Agropecuaria en Colombia");
     await expect(epsea).toContainText(
-      "Empresa habilitada como EPSEA mediante resolución 048 del 01 de marzo de 2024 de la Agencia de Desarrollo Rural (ADR).",
+      "es una empresa habilitada como EPSEA mediante resolución número 187 de 2026 de la Agencia de Desarrollo Rural (ADR).",
     );
-    const epseaStatement = epsea.locator(".epsea-statement");
-    await expect(epseaStatement.locator("span, strong, em, small")).toHaveCount(0);
-    await expect(epseaStatement).toHaveCSS("font-family", /Hanken Grotesk/);
-    await expect(epseaStatement).toHaveCSS("font-weight", "320");
-    await expect(epseaStatement).toHaveCSS("font-style", "normal");
-    await expect(epsea.locator(".epsea-code")).toHaveCSS("justify-self", "center");
-    await expect(epsea.locator(".epsea-code")).toHaveCSS("align-self", "center");
-    await expect(epsea.locator(".epsea-code")).not.toHaveCSS("transform", "none");
-    await expect(epsea.locator("aside")).toHaveCount(0);
+    await expect(epsea.getByRole("button", { name: "Conoce más" })).toHaveAttribute("aria-haspopup", "dialog");
     expect(
-      await impact.evaluate((element) =>
+      await page.locator(".consulting-hero").evaluate((element) =>
         element.nextElementSibling?.classList.contains("epsea-section"),
       ),
     ).toBe(true);
-    await expect(page.locator(".project-line-card")).toHaveCount(3);
+    await expect(page.locator('[data-home="6"] a[aria-label]')).toHaveCount(3);
     await expect(page.locator(".about-editorial")).toHaveCount(0);
     await expect(page.locator(".difference-section")).toHaveCount(0);
-    await expect(page.locator(".project-lines")).toHaveCSS("color", "rgb(255, 255, 255)");
-    expect(
-      await page.locator(".project-lines").evaluate((element) =>
-        getComputedStyle(element).backgroundImage,
-      ),
-    ).toContain("linear-gradient");
+    await expect(page.locator('[data-home="6"]')).toHaveCSS("color", "rgb(255, 255, 255)");
+    await expect(page.locator('[data-home="6"]')).toHaveCSS("background-color", "rgb(27, 35, 68)");
     expect(
       await page.locator(".epsea-section").evaluate((element) =>
         getComputedStyle(element).backgroundImage,
       ),
     ).not.toBe("none");
     expect(
-      await page.locator(".allies-section").evaluate((element) =>
+      await page.locator("#aliados").evaluate((element) =>
         getComputedStyle(element).backgroundImage,
       ),
     ).not.toBe("none");
-    const statement = page.locator(".project-statement");
-    await expect(statement.locator(".statement-image img")).toBeVisible();
-    await expect(statement.locator(".statement-image img")).toHaveAttribute(
-      "alt",
-      "Planta joven sostenida por manos en un contexto agrícola",
-    );
-    const statementImageBox = await statement.locator(".statement-image").boundingBox();
-    const statementTitleBox = await statement.getByRole("heading", { level: 2 }).boundingBox();
-    expect(statementImageBox).not.toBeNull();
-    expect(statementTitleBox).not.toBeNull();
-    if ((page.viewportSize()?.width ?? 0) >= 900) {
-      expect(statementImageBox!.x + statementImageBox!.width).toBeLessThan(
-        statementTitleBox!.x,
-      );
-    } else {
-      expect(statementImageBox!.y + statementImageBox!.height).toBeLessThan(
-        statementTitleBox!.y,
-      );
+    const experience = page.locator("#nosotros");
+    await expect(experience.locator("video")).toBeVisible();
+    await expect(experience.getByRole("heading", { name: "Experiencia que ya dejó huella" })).toBeVisible();
+    await expect(experience.locator(".experience-metrics li")).toHaveCount(4);
+    await expect(experience.locator(".experience-metrics li")).toHaveText([
+      /37municipios atendidos/,
+      /1\.510personas impactadas/,
+      /8proyectos ejecutados/,
+      /21organizaciones acompañadas/,
+    ]);
+    const allies = page.locator("#aliados");
+    await expect(allies.getByRole("img")).toHaveCount(13);
+    await expect(allies.getByRole("img", { name: "Infinite 1133" })).toBeVisible();
+  });
+
+  test("presenta los trece aliados sin duplicar contenido accesible", async ({ page }) => {
+    await page.goto("/#aliados");
+    const allies = page.locator("#aliados");
+    await expect(allies.getByRole("img")).toHaveCount(13);
+    await expect(allies.getByRole("heading")).toHaveText("Relaciones queamplían el impacto.");
+    for (const image of await allies.getByRole("img").all()) {
+      await expect(image).toBeVisible();
     }
-    await expect(page.locator("#nosotros")).toBeVisible();
-    const allies = page.locator("#aliados");
-    await expect(allies.locator(".allies-group")).toHaveCount(2);
-    await expect(allies.locator(".allies-group").first().locator("img")).toHaveCount(5);
-    await expect(allies.locator('.allies-group[aria-hidden="true"] img')).toHaveCount(5);
-    await expect(allies.locator(".allies-track")).toHaveCSS("animation-name", "none");
   });
 
-  test("mueve los aliados en una cinta continua y accesible", async ({ page }) => {
+  test("presenta el nuevo bloque EPSEA después de la portada", async ({ page }) => {
+    await page.goto("/");
+    const epsea = page.locator(".epsea-section");
+    await epsea.scrollIntoViewIfNeeded();
+    await expect(epsea.locator(".epsea-logo img")).toBeVisible();
+    await expect(epsea.locator(".epsea-divider")).toBeVisible();
+    await expect(epsea.getByRole("button", { name: "Conoce más" })).toBeVisible();
+    await epsea.getByRole("button", { name: "Conoce más" }).click();
+    await expect(page.locator(".epsea-dialog")).toBeVisible();
+    await expect(page.locator(".epsea-dialog iframe")).toHaveAttribute("src", /resolucion-187-2026-epsea-juzt\.pdf/);
+    await page.keyboard.press("Escape");
+    await expect(page.locator(".epsea-dialog")).toBeHidden();
+  });
+
+  test("reproduce el video sin controles y lo pausa al hacer clic", async ({ page }) => {
+    await page.goto("/");
+    const experience = page.locator("#nosotros");
+    const video = experience.locator("video");
+    expect(await video.getAttribute("controls")).toBeNull();
+    await expect(video).toHaveAttribute("playsinline", "");
+    expect(await video.evaluate((node) => (node as HTMLVideoElement).paused)).toBe(true);
+    await video.scrollIntoViewIfNeeded();
+    await expect.poll(() => video.evaluate((node) => !(node as HTMLVideoElement).paused)).toBe(true);
+
+    await experience.getByRole("button", { name: "Pausar video" }).click();
+    await expect.poll(() => video.evaluate((node) => (node as HTMLVideoElement).paused)).toBe(true);
+    await experience.getByRole("button", { name: "Reproducir video" }).click();
+    await expect.poll(() => video.evaluate((node) => !(node as HTMLVideoElement).paused)).toBe(true);
+    expect(await video.evaluate((node) => (node as HTMLVideoElement).muted)).toBe(false);
+  });
+
+  test("detiene el audio fuera de vista y respeta la pausa manual", async ({ page }) => {
+    await page.goto("/");
+    const video = page.locator("#nosotros video");
+    await video.scrollIntoViewIfNeeded();
+    await expect.poll(() => video.evaluate((node) => !(node as HTMLVideoElement).paused)).toBe(true);
+
+    const scrollToProjects = () => page.evaluate(() =>
+      window.scrollTo({
+        top: (document.querySelector('[data-home="6"]') as HTMLElement).offsetTop + 100,
+        behavior: "instant",
+      }),
+    );
+    const scrollToVideo = () => page.evaluate(() =>
+      window.scrollTo({
+        top: (document.querySelector("#nosotros") as HTMLElement).offsetTop,
+        behavior: "instant",
+      }),
+    );
+
+    await scrollToProjects();
+    await expect.poll(() => video.evaluate((node) => (node as HTMLVideoElement).paused)).toBe(true);
+
+    await scrollToVideo();
+    await expect.poll(() => video.evaluate((node) => !(node as HTMLVideoElement).paused)).toBe(true);
+    await page.locator(".experience-video-button").click();
+    await expect.poll(() => video.evaluate((node) => (node as HTMLVideoElement).paused)).toBe(true);
+
+    await scrollToProjects();
+    await scrollToVideo();
+    await page.waitForTimeout(150);
+    expect(await video.evaluate((node) => (node as HTMLVideoElement).paused)).toBe(true);
+  });
+
+  test("mantiene el video a pantalla completa menos la franja de cifras en cualquier tamaño", async ({ page }) => {
+    for (const viewport of [
+      { width: 320, height: 568 }, { width: 390, height: 844 },
+      { width: 844, height: 390 }, { width: 768, height: 1024 },
+      { width: 1280, height: 720 }, { width: 1366, height: 768 },
+      { width: 1903, height: 991 }, { width: 2560, height: 1440 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await page.goto("/", { waitUntil: "domcontentloaded" });
+      await page.evaluate(() => document.fonts.ready);
+      const section = page.locator("#nosotros");
+      await section.evaluate((element) => window.scrollTo({ top: (element as HTMLElement).offsetTop, behavior: "instant" }));
+      const bounds = await section.evaluate((element) => {
+        const box = element.getBoundingClientRect();
+        const video = element.querySelector(".experience-video-button")!.getBoundingClientRect();
+        const stats = element.querySelector(".experience-stats")!.getBoundingClientRect();
+        return { top: box.top, bottom: box.bottom, height: box.height,
+          videoTop: video.top, videoBottom: video.bottom,
+          statsTop: stats.top, statsBottom: stats.bottom,
+          previousBottom: element.previousElementSibling!.getBoundingClientRect().bottom,
+          nextTop: element.nextElementSibling!.getBoundingClientRect().top,
+        };
+      });
+      const videoOffset = viewport.width <= 640 ? 160 : 180;
+      expect(bounds.videoBottom - bounds.videoTop, `${viewport.width}px`).toBeCloseTo(viewport.height - videoOffset, 0);
+      expect(bounds.top).toBeCloseTo(0, 0);
+      expect(bounds.previousBottom).toBeLessThanOrEqual(1);
+      expect(bounds.videoTop).toBeCloseTo(0, 0);
+      expect(bounds.statsTop).toBeCloseTo(bounds.videoBottom, 0);
+      expect(bounds.nextTop).toBeCloseTo(bounds.statsBottom, 0);
+      await expect(section.locator("video")).toHaveCSS("object-fit", "contain");
+      expect(await section.locator("h2, li").evaluateAll((nodes) => nodes.filter((node) => node.scrollWidth > node.clientWidth + 1).length)).toBe(0);
+    }
+  });
+
+  test("cuenta desde cero al aparecer la franja de resultados", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "no-preference" });
     await page.goto("/");
 
-    const allies = page.locator("#aliados");
-    const track = allies.locator(".allies-track");
-    const groups = allies.locator(".allies-group");
+    const values = await page.evaluate(async () => {
+      const metrics = document.querySelector(".experience-stats");
+      const number = metrics?.querySelectorAll("strong")[1];
+      if (!metrics || !number) return [];
 
-    await allies.scrollIntoViewIfNeeded();
-    await expect(track).toHaveCSS("animation-name", "allies-conveyor");
-    await expect(track).toHaveCSS("animation-timing-function", "linear");
-    await expect(groups).toHaveCount(2);
-    await expect(groups.nth(1)).toHaveAttribute("aria-hidden", "true");
+      const samples = [number.textContent ?? ""];
+      const observer = new MutationObserver(() => samples.push(number.textContent ?? ""));
+      observer.observe(number, { characterData: true, childList: true, subtree: true });
+      metrics.scrollIntoView({ block: "center" });
+      await new Promise((resolve) => window.setTimeout(resolve, 1800));
+      observer.disconnect();
+      return samples;
+    });
 
-    const groupWidths = await groups.evaluateAll((elements) =>
-      elements.map((element) => element.getBoundingClientRect().width),
-    );
-    expect(Math.abs(groupWidths[0]! - groupWidths[1]!)).toBeLessThan(1);
-
-    await page.mouse.move(0, 0);
-    await expect(track).toHaveCSS("animation-play-state", "running");
-    const initialX = await track.evaluate((element) => element.getBoundingClientRect().x);
-    await page.waitForTimeout(300);
-    const nextX = await track.evaluate((element) => element.getBoundingClientRect().x);
-    expect(nextX).toBeLessThan(initialX);
-  });
-
-  test("revela las cifras de impacto en una secuencia de viewport", async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: "no-preference" });
-    await page.goto("/");
-
-    const impact = page.locator(".impact-strip");
-    const metrics = impact.locator("li");
-    await expect(impact).toHaveAttribute("data-visible", "false");
-    await expect(metrics.first()).toHaveCSS("opacity", "0");
-
-    await impact.scrollIntoViewIfNeeded();
-    await expect(impact).toHaveAttribute("data-visible", "true");
-    await expect(metrics.first()).toHaveCSS("opacity", "1");
-    await expect(metrics.nth(3)).toHaveCSS("opacity", "1");
-    await expect(impact.locator(".impact-number-frame strong")).toHaveText(
-      ["37", "1.510", "8", "21"],
-      { timeout: 3_000 },
-    );
+    expect(values).toContain("0");
+    expect(values.some((value) => Number(value.replace(/\D/g, "")) > 0 && value !== "1.510")).toBe(true);
+    await expect(page.locator(".experience-metrics strong")).toHaveText(["37", "1.510", "8", "21"]);
   });
 
   test("presenta un carrusel editorial accesible para consultoría y equipos", async ({ page }) => {
     await page.goto("/");
-
     const hero = page.locator(".consulting-hero");
-    await hero.getByRole("button", { name: "Pausar presentación" }).click();
-    await expect(hero.locator("img")).toHaveCount(4);
+    await expect(hero.getByRole("button", { name: "Pausar presentación" })).toHaveCount(0);
     await expect(hero).toHaveAttribute("aria-roledescription", "carrusel");
+    await expect(hero.locator(".hero-slider-controls button")).toHaveCount(2);
+    await expect(hero.locator(".hero-slider-controls")).toHaveText("");
     await expect(hero).toHaveAttribute("data-active-slide", "1");
     await expect(hero.locator(".hero-slide-consulting")).toHaveAttribute("aria-hidden", "false");
     await expect(hero.locator(".hero-slide-equipment")).toHaveAttribute("aria-hidden", "true");
-    const person = hero.locator('img[alt="Profesional de JUZT"]');
-    await expect(person).toBeVisible();
-    await expect(hero.locator(".hero-person-composite")).toBeVisible();
-    await expect(hero.locator(".hero-cartography svg")).toHaveCount(1);
-    await expect(hero.locator(".hero-contour-lines path")).toHaveCount(3);
-    await expect(hero.locator(".hero-cartography")).toHaveAttribute("aria-hidden", "true");
-    await expect(hero.locator(".hero-cartography")).toHaveCSS("pointer-events", "none");
-    expect(
-      Number(await hero.locator(".hero-visual").evaluate((element) => getComputedStyle(element).zIndex)),
-    ).toBeGreaterThan(
-      Number(
-        await hero.locator(".hero-cartography").evaluate(
-          (element) => getComputedStyle(element).zIndex,
-        ),
-      ),
-    );
-    await expect(person).toHaveAttribute("src", /hero-person-integrated/);
-    await expect(hero.locator('img[src*="logo_juzt_hero_white"]')).toBeVisible();
-    const territory = hero.locator('img[src*="hero-territory-hq"]');
-    await expect(territory).toBeVisible();
-    await expect(territory).toHaveCSS("mix-blend-mode", "normal");
-    await expect(hero.getByRole("button")).toHaveCount(5);
-    await expect(hero.getByText(/consultoría para el territorio/i)).toHaveCount(0);
-    await expect(hero.getByText(/JUZT \/ 2026/i)).toHaveCount(0);
-    await expect(hero.getByText(/estrategia · gestión · ejecución/i)).toHaveCount(0);
-    await expect(hero.getByRole("link", { name: /hablemos de tu proyecto/i })).toHaveAttribute(
-      "href",
-      /wa\.me/,
-    );
-    await expect(hero.getByRole("link", { name: /conoce nuestros proyectos/i })).toHaveAttribute(
-      "href",
-      "/proyectos",
-    );
-    await expect(hero.getByRole("link", { name: /equipos e insumos/i })).toHaveCount(0);
-    const primaryCta = hero.getByRole("link", { name: /hablemos de tu proyecto/i });
-    await expect(primaryCta).toHaveCSS("background-color", "rgb(28, 96, 155)");
-    await primaryCta.hover();
-    await expect(primaryCta).toHaveCSS("background-color", "rgb(25, 33, 71)");
-    await expect(hero.locator(".hero-route-mark")).toHaveCount(0);
-    await expect(hero.locator(".hero-launch-mark")).toHaveCount(3);
-    await expect(hero.locator(".hero-launch-track svg")).toHaveCount(6);
-    expect(await hero.locator(".hero-links").textContent()).not.toMatch(/[↗→]/);
-
-    const titleBox = await hero.locator("h1").boundingBox();
-    const paragraphBox = await hero.locator(".hero-lede").boundingBox();
-    const linksBox = await hero.locator(".hero-links").boundingBox();
-    const editorialBox = await hero.locator(".hero-editorial").boundingBox();
-    const mainBox = await hero.locator(".hero-main").boundingBox();
-    const visualBox = await hero.locator(".hero-visual").boundingBox();
-    const brandBox = await hero.locator(".hero-brand-backdrop").boundingBox();
-    const personBox = await hero.locator(".hero-person").boundingBox();
-    await expect(hero.locator(".hero-visual-field")).toBeVisible();
-    await expect(hero.locator(".hero-field-surface")).toHaveCount(1);
-    await expect(hero.locator(".hero-field-outline")).toHaveCount(1);
-    await expect(hero.locator(".hero-field-contour")).toHaveCount(0);
-    await expect(hero.locator(".hero-brand-backdrop")).toHaveCSS("opacity", "1");
-    await expect
-      .poll(() =>
-        hero.locator(".hero-brand-backdrop").evaluate((node) => {
-          const clipPath = getComputedStyle(node).clipPath;
-          return Number.parseFloat(clipPath.match(/([\d.]+)%/)?.[1] ?? "0");
-        }),
-      )
-      .toBeGreaterThanOrEqual(47.1);
-    const viewport = page.viewportSize();
-
-    expect(titleBox).not.toBeNull();
-    expect(paragraphBox).not.toBeNull();
-    expect(linksBox).not.toBeNull();
-    expect(editorialBox).not.toBeNull();
-    expect(mainBox).not.toBeNull();
-    expect(visualBox).not.toBeNull();
-    expect(brandBox).not.toBeNull();
-    expect(personBox).not.toBeNull();
-    expect(paragraphBox!.y).toBeGreaterThan(titleBox!.y + titleBox!.height);
-    expect(brandBox!.x).toBeGreaterThanOrEqual(visualBox!.x);
-    expect(brandBox!.x + brandBox!.width).toBeLessThanOrEqual(
-      visualBox!.x + visualBox!.width,
-    );
-    expect(brandBox!.y).toBeGreaterThanOrEqual(visualBox!.y);
-    expect(brandBox!.y + brandBox!.height).toBeLessThanOrEqual(
-      visualBox!.y + visualBox!.height,
-    );
-    expect(personBox!.y).toBeGreaterThanOrEqual(visualBox!.y - visualBox!.height * 0.06);
-    expect(personBox!.y + personBox!.height).toBeLessThanOrEqual(
-      visualBox!.y + visualBox!.height,
-    );
-
-    if ((viewport?.width ?? 0) >= 900) {
-      expect(
-        Math.abs(
-          mainBox!.y - editorialBox!.y -
-            (editorialBox!.y + editorialBox!.height - (mainBox!.y + mainBox!.height)),
-        ),
-      ).toBeLessThan(16);
-      expect(visualBox!.x).toBeGreaterThan(titleBox!.x + titleBox!.width);
-      expect(Math.abs(visualBox!.y - titleBox!.y)).toBeLessThan(8);
-      expect(
-        paragraphBox!.y - (titleBox!.y + titleBox!.height),
-      ).toBeLessThan(visualBox!.height * 0.18);
-      expect(
-        linksBox!.y - (paragraphBox!.y + paragraphBox!.height),
-      ).toBeGreaterThanOrEqual((viewport?.height ?? 0) <= 752 ? 24 : 32);
-      expect(
-        visualBox!.y + visualBox!.height - (linksBox!.y + linksBox!.height),
-      ).toBeLessThan(visualBox!.height * 0.42);
-
-      await page.setViewportSize({ width: 1920, height: 941 });
-      await page.waitForTimeout(300);
-      const wideTitleBox = await hero.locator("h1").boundingBox();
-      const wideParagraphBox = await hero.locator(".hero-lede").boundingBox();
-      const wideLinksBox = await hero.locator(".hero-links").boundingBox();
-      const wideEditorialBox = await hero.locator(".hero-editorial").boundingBox();
-      const wideMainBox = await hero.locator(".hero-main").boundingBox();
-      expect(wideTitleBox).not.toBeNull();
-      expect(wideParagraphBox).not.toBeNull();
-      expect(wideLinksBox).not.toBeNull();
-      expect(wideEditorialBox).not.toBeNull();
-      expect(wideMainBox).not.toBeNull();
-      expect(
-        Math.abs(
-          wideMainBox!.y - wideEditorialBox!.y -
-            (wideEditorialBox!.y + wideEditorialBox!.height -
-              (wideMainBox!.y + wideMainBox!.height)),
-        ),
-      ).toBeLessThan(16);
-      expect(
-        wideParagraphBox!.y - (wideTitleBox!.y + wideTitleBox!.height),
-      ).toBeGreaterThanOrEqual(44);
-      expect(
-        wideLinksBox!.y - (wideParagraphBox!.y + wideParagraphBox!.height),
-      ).toBeGreaterThanOrEqual(36);
-    } else {
-      expect(visualBox!.y + visualBox!.height).toBeLessThan(titleBox!.y);
-      expect(visualBox!.width).toBeLessThanOrEqual((viewport?.width ?? 0) * 0.92 + 1);
-      expect(visualBox!.height).toBeLessThanOrEqual((viewport?.height ?? 0) * 0.58);
-    }
-
-    await hero.getByRole("button", { name: /ver slide 2: equipos e insumos/i }).click();
+    await expect(hero.getByRole("img", { name: /productores rurales/ })).toHaveAttribute("src", /home-slide-1-field/);
+    await expect(hero.getByRole("link", { name: /hablemos de tu proyecto/i })).toHaveAttribute("href", /wa\.me/);
+    await expect(hero.getByRole("link", { name: /conoce nuestros proyectos/i })).toHaveAttribute("href", "/proyectos");
+    await hero.getByRole("button", { name: "Ver siguiente slide" }).click();
     await expect(hero).toHaveAttribute("data-active-slide", "2");
     await expect(hero.locator(".hero-slide-consulting")).toHaveAttribute("aria-hidden", "true");
     await expect(hero.locator(".hero-slide-equipment")).toHaveAttribute("aria-hidden", "false");
-    await expect(
-      hero.getByRole("heading", { level: 2, name: /equipos que ponen la productividad/i }),
-    ).toBeVisible();
-    await expect(
-      hero.getByRole("link", { name: /conoce el catálogo/i }),
-    ).toHaveAttribute("href", "https://juztmaquinaria.lovable.app/");
-    await expect(
-      hero.getByRole("img", { name: /motoazada, ahoyador, biotrituradora y transporter/i }),
-    ).toBeVisible();
-    await expect(hero.locator(".equipment-collage-image")).toHaveAttribute(
-      "src",
-      /hero-equipos-integrated-v2/,
-    );
-    const collageBox = await hero.locator(".equipment-collage").boundingBox();
-    const equipmentCopyBox = await hero.locator(".equipment-copy").boundingBox();
-    await expect(hero.locator(".equipment-copy .micro-label")).toHaveCount(0);
-    expect(collageBox).not.toBeNull();
-    expect(equipmentCopyBox).not.toBeNull();
-    if ((viewport?.width ?? 0) >= 900) {
-      expect(collageBox!.x + collageBox!.width).toBeLessThanOrEqual(equipmentCopyBox!.x);
-      expect(collageBox!.width).toBeGreaterThan(equipmentCopyBox!.width);
-      await expect(hero.locator(".equipment-copy")).toHaveCSS("text-align", "right");
-      await expect(hero.locator(".equipment-copy h2")).toHaveCSS("text-align", "right");
-      const desktopEquipmentHeroBox = await hero.locator(".equipment-hero").boundingBox();
-      const desktopViewportWidth = await page.evaluate(() => window.innerWidth);
-      expect(desktopEquipmentHeroBox).not.toBeNull();
-      // El slide de equipos va a sangre: el texto queda pegado al borde derecho.
-      expect(desktopEquipmentHeroBox!.width / desktopViewportWidth).toBeGreaterThanOrEqual(0.95);
-      expect(equipmentCopyBox!.x + equipmentCopyBox!.width).toBeGreaterThan(
-        desktopViewportWidth - 72,
-      );
-    } else {
-      expect(collageBox!.y + collageBox!.height).toBeLessThanOrEqual(equipmentCopyBox!.y);
-      await expect(hero.locator(".equipment-copy")).toHaveCSS("text-align", "left");
-      await expect(hero.locator(".equipment-copy h2")).toHaveCSS("text-align", "left");
-    }
-    await expect(hero.locator(".equipment-copy h2 > span")).toHaveCount(2);
+    await expect(hero.locator(".hero-slide-consulting a").first()).toHaveAttribute("tabindex", "-1");
+    await expect(hero.getByRole("link", { name: /conoce nuestro catálogo/i })).toHaveAttribute("href", "https://juztmaquinaria.lovable.app/");
+    await expect(hero.getByRole("img", { name: /Trabajadores usando un transporter/i })).toHaveAttribute("src", /home-slide-2-equipment/);
+    await hero.getByRole("button", { name: "Ver siguiente slide" }).click();
+    await expect(hero).toHaveAttribute("data-active-slide", "1");
+    await expect(hero.locator(".hero-slide-consulting a").first()).toHaveAttribute("tabindex", "0");
+  });
 
-    if ((viewport?.width ?? 0) >= 900) {
-      await page.setViewportSize({ width: 2560, height: 1440 });
-      await page.waitForTimeout(300);
-      const largeEquipmentHeroBox = await hero.locator(".equipment-hero").boundingBox();
-      const largeCollageBox = await hero.locator(".equipment-collage").boundingBox();
-      const largeCopyBox = await hero.locator(".equipment-copy").boundingBox();
-      const largeViewportWidth = await page.evaluate(() => window.innerWidth);
-      expect(largeEquipmentHeroBox).not.toBeNull();
-      expect(largeCollageBox).not.toBeNull();
-      expect(largeCopyBox).not.toBeNull();
-      expect(largeEquipmentHeroBox!.width / largeViewportWidth).toBeGreaterThanOrEqual(0.95);
-      expect(largeCollageBox!.width / largeViewportWidth).toBeGreaterThanOrEqual(0.48);
-      expect(largeCopyBox!.x - (largeCollageBox!.x + largeCollageBox!.width)).toBeLessThan(100);
-      expect(largeCopyBox!.x + largeCopyBox!.width).toBeGreaterThan(largeViewportWidth - 96);
+  test("el carrusel principal cambia cada ocho segundos sin botón de pausa", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.clock.install({ time: new Date("2026-10-02T12:00:00Z") });
+    await page.goto("/");
+    await page.clock.pauseAt(new Date("2026-10-02T12:01:00Z"));
+    const hero = page.locator(".consulting-hero");
+    await expect(hero.locator(".hero-slider-pause")).toHaveCount(0);
+    await hero.getByRole("button", { name: "Ver siguiente slide" }).click();
+    if (await hero.getAttribute("data-active-slide") !== "1") {
+      await hero.getByRole("button", { name: "Ver siguiente slide" }).click();
     }
+    await page.clock.fastForward(7999);
+    await expect(hero).toHaveAttribute("data-active-slide", "1");
+    await page.clock.fastForward(1);
+    await expect(hero).toHaveAttribute("data-active-slide", "2");
+    await page.clock.fastForward(8000);
+    await expect(hero).toHaveAttribute("data-active-slide", "1");
   });
 
   test("publica Proyectos como página independiente", async ({ page }) => {
     await page.goto("/proyectos");
-
-    await expect(page.getByRole("heading", { level: 1, name: /estrategia que llega/i })).toBeVisible();
-    await expect(page.locator(".project-detail")).toHaveCount(3);
-    await expect(page.locator(".method-section li")).toHaveCount(4);
-    await expect(page.locator(".epsea-section")).toHaveCount(0);
-    await expect(page.locator('.project-detail img[src*="project-"]')).toHaveCount(3);
-    const projectImages = page.locator(".project-detail img");
-    for (let index = 0; index < 3; index += 1) {
-      const image = projectImages.nth(index);
-      await image.scrollIntoViewIfNeeded();
-      await expect.poll(() =>
-        image.evaluate((node) =>
-          node instanceof HTMLImageElement ? node.naturalWidth : 0,
-        ),
-      ).toBeGreaterThan(0);
-    }
+    await expect(page.getByRole("heading", { level: 1, name: /Proyectos y consultoría/i })).toBeVisible();
+    await expect(page.locator("#linea-proyectos")).toHaveCount(1);
+    await expect(page.locator(".project-detail, .method-section, .epsea-section")).toHaveCount(0);
+    await page.locator("#linea-proyectos img").evaluate((node) => (node as HTMLImageElement).decode());
   });
 
   test("mantiene una jerarquía editorial contenida en pantallas de escritorio", async ({ page }) => {
     await page.setViewportSize({ width: 1903, height: 949 });
 
     await page.goto("/");
-    const statementSize = Number.parseFloat(
-      await page.locator(".statement-grid h2").evaluate((node) => getComputedStyle(node).fontSize),
+    const experienceTitleSize = Number.parseFloat(
+      await page.locator(".experience-stats h2").evaluate((node) => getComputedStyle(node).fontSize),
     );
     const heroTitleSize = Number.parseFloat(
       await page.locator(".hero-copy h1").evaluate((node) => getComputedStyle(node).fontSize),
@@ -433,11 +309,8 @@ test.describe("Nueva arquitectura JUZT 2026", () => {
     const epseaGridBox = await page.locator(".epsea-grid").boundingBox();
     const epseaCodeBox = await page.locator(".epsea-code").boundingBox();
     const epseaStatementBox = await page.locator(".epsea-statement").boundingBox();
-    const footerSize = Number.parseFloat(
-      await page.locator(".footer-invitation h2").evaluate((node) => getComputedStyle(node).fontSize),
-    );
     const projectLinesTitleSize = Number.parseFloat(
-      await page.locator("#project-lines-title").evaluate((node) => getComputedStyle(node).fontSize),
+      await page.locator("#reform-lines-title").evaluate((node) => getComputedStyle(node).fontSize),
     );
     expect(heroTitleSize).toBeLessThanOrEqual(112);
     expect(epseaCodeSize).toBeLessThanOrEqual(140);
@@ -447,68 +320,39 @@ test.describe("Nueva arquitectura JUZT 2026", () => {
     expect(
       epseaStatementBox!.x + epseaStatementBox!.width - epseaCodeBox!.x,
     ).toBeGreaterThanOrEqual(epseaGridBox!.width * 0.78);
-    expect(statementSize).toBeLessThanOrEqual(71);
-    expect(projectLinesTitleSize).toBeLessThanOrEqual(80);
-    expect(footerSize).toBeLessThanOrEqual(68);
+    expect(experienceTitleSize).toBeLessThanOrEqual(58);
+    expect(projectLinesTitleSize).toBeLessThanOrEqual(100);
 
     await page.goto("/proyectos");
-    const projectTitle = page.locator(".inner-hero h1");
-    const projectTitleSize = Number.parseFloat(
-      await projectTitle.evaluate((node) => getComputedStyle(node).fontSize),
-    );
-    const projectTitleBox = await projectTitle.boundingBox();
-    const projectLinkBox = await page.locator(".inner-hero .text-link").boundingBox();
-    expect(projectTitleSize).toBeLessThanOrEqual(106);
-    expect(projectTitleBox).not.toBeNull();
-    expect(projectLinkBox).not.toBeNull();
-    expect(projectLinkBox!.y + projectLinkBox!.height).toBeLessThan(949);
+    const projectTitle = page.locator("#linea-proyectos h1");
+    expect(Number.parseFloat(await projectTitle.evaluate((node) => getComputedStyle(node).fontSize))).toBeLessThanOrEqual(106);
+    await expect(projectTitle).toBeVisible();
   });
 
   test("aplica la escala tipográfica completa en Proyectos y Casos de éxito", async ({ page }) => {
     await page.setViewportSize({ width: 1903, height: 949 });
 
     await page.goto("/proyectos");
-    const projectSectionSizes = await page
-      .locator(".project-detail-copy h2, .method-intro h2")
-      .evaluateAll((nodes) => nodes.map((node) => Number.parseFloat(getComputedStyle(node).fontSize)));
-    expect(projectSectionSizes.every((size) => size <= 64)).toBe(true);
-    expect(
-      Number.parseFloat(
-        await page.locator(".page-bridge h2").evaluate((node) => getComputedStyle(node).fontSize),
-      ),
-    ).toBeLessThanOrEqual(70);
+    await expect(page.locator("#linea-proyectos h1")).toHaveCSS("font-family", /Pitagon Sans Slide/);
+    expect(Number.parseFloat(await page.locator("#linea-proyectos h3").evaluate((node) => getComputedStyle(node).fontSize))).toBeLessThanOrEqual(64);
 
     await page.goto("/casos-de-exito");
-    const casesSectionSizes = await page
-      .locator(".cases-impact h2, .case-editorial h2, .cases-note h2")
-      .evaluateAll((nodes) => nodes.map((node) => Number.parseFloat(getComputedStyle(node).fontSize)));
-    expect(casesSectionSizes.every((size) => size <= 64)).toBe(true);
     expect(
-      await page.locator(".cases-hero h1").evaluate((node) => getComputedStyle(node).fontFamily),
-    ).toContain("pitagon");
+      await page.locator("#casos-en-construccion h1").evaluate((node) => getComputedStyle(node).fontFamily),
+    ).toContain("Pitagon Sans Slide");
     expect(
-      await page.locator(".cases-hero-grid > p:last-child").evaluate(
+      await page.locator("#casos-en-construccion p").first().evaluate(
         (node) => getComputedStyle(node).fontFamily,
       ),
-    ).toContain("Hanken Grotesk");
-    expect(
-      await page.locator(".cases-hero .micro-label").evaluate(
-        (node) => getComputedStyle(node).fontFamily,
-      ),
-    ).toContain("IBM Plex Mono");
+    ).toContain("Pitagon Sans Slide");
 
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.goto("/proyectos");
-    const methodBox = await page.locator(".method-section").boundingBox();
-    expect(methodBox).not.toBeNull();
-    expect(methodBox!.height).toBeLessThanOrEqual(720);
+    await expect(page.locator("#linea-proyectos")).toBeVisible();
 
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/casos-de-exito");
-    const mobileSectionSizes = await page
-      .locator(".cases-impact h2, .case-editorial h2, .cases-note h2")
-      .evaluateAll((nodes) => nodes.map((node) => Number.parseFloat(getComputedStyle(node).fontSize)));
-    expect(mobileSectionSizes.every((size) => size <= 40)).toBe(true);
+    await expect(page.locator("#casos-en-construccion h1")).toBeVisible();
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -519,7 +363,7 @@ test.describe("Nueva arquitectura JUZT 2026", () => {
   test("mantiene el contenido visible cuando se reduce el movimiento", async ({ page }) => {
     for (const path of ["/", "/proyectos", "/casos-de-exito", "/privacidad"]) {
       await page.goto(path);
-      const reveals = page.locator("[data-motion-reveal]");
+      const reveals = page.locator(path === "/" ? "[data-home]" : path === "/casos-de-exito" ? "#casos-en-construccion" : path === "/proyectos" ? "#linea-proyectos" : "[data-motion-reveal]");
       expect(await reveals.count()).toBeGreaterThan(0);
       expect(
         await reveals.evaluateAll((elements) =>
@@ -532,51 +376,47 @@ test.describe("Nueva arquitectura JUZT 2026", () => {
     }
   });
 
-  test("aplica entradas editoriales solo al entrar en viewport", async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: "no-preference" });
+  test("permite explorar las líneas desde sus tarjetas", async ({ page }) => {
     await page.goto("/");
-
-    const statement = page.locator(".statement-copy");
-    await expect(statement).toHaveAttribute("data-motion-stagger", "true");
-    await statement.scrollIntoViewIfNeeded();
-    await expect(statement.locator("[data-reveal-item]").first()).toHaveCSS("opacity", "1");
-
-    const cards = page.locator(".project-line-grid");
-    await expect(cards).toHaveAttribute("data-motion-stagger", "true");
-    await cards.scrollIntoViewIfNeeded();
-    await expect(cards.locator("[data-reveal-item]").last()).toHaveCSS("opacity", "1", {
-      timeout: 10_000,
-    });
+    await page.locator('#lineas-estrategicas').getByRole("link", { name: "Proyectos y consultoría", exact: true }).click();
+    await expect(page).toHaveURL(/\/proyectos#linea-proyectos$/);
+    await expect(page.locator("#linea-proyectos h1")).toBeVisible();
+    await page.goto("/");
+    await page.locator('#lineas-estrategicas').getByRole("link", { name: "Equipos, insumos y tecnología", exact: true }).click();
+    await expect(page).toHaveURL(/\/proyectos#linea-equipos$/);
+    await expect(page.locator("#linea-equipos h2")).toBeVisible();
   });
 
-  test("publica Casos de éxito sin inventar testimonios", async ({ page }) => {
+  test("publica Casos de éxito como sección en construcción sin inventar testimonios", async ({ page }) => {
     await page.goto("/casos-de-exito");
 
-    await expect(page.getByRole("heading", { level: 1, name: /resultados que merecen/i })).toBeVisible();
-    await expect(page.locator(".cases-impact li")).toHaveCount(4);
-    await expect(page.locator(".case-principles article")).toHaveCount(3);
-    await expect(page.getByText(/no publicamos nombres, testimonios ni resultados/i)).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: /Estamos construyendo historias que dejan huella/i })).toBeVisible();
+    await expect(page.getByText("Sección en construcción")).toBeVisible();
+    await expect(page.locator("#casos-en-construccion article")).toHaveCount(0);
   });
 
   test("lleva un footer de contacto completo en cada página", async ({ page }) => {
     test.setTimeout(60_000);
-    for (const path of ["/", "/proyectos", "/casos-de-exito"]) {
+    let baseline: unknown;
+    for (const path of ["/", "/nosotros", "/proyectos", "/equipos-e-insumos", "/gestion-financiera", "/casos-de-exito", "/privacidad"]) {
       await page.goto(`${path}#contacto-footer`, { waitUntil: "domcontentloaded" });
+      await page.evaluate(() => document.fonts.ready);
       const footer = page.locator("#contacto-footer");
-      await expect(footer).toBeVisible();
+      await expect(footer).toHaveCount(1);
       await expect(footer.getByText("gerencia@juzt.com.co")).toBeVisible();
       await expect(footer.getByText("+57 311 334 1341")).toBeVisible();
-      await expect(footer.getByText(/NIT 901\.767\.156/)).toBeVisible();
-      await expect(footer.getByLabel("Nombre")).toBeVisible();
-      const footerDescriptor = footer.locator(".logo-footer-descriptor");
-      await expect(footerDescriptor).toContainText("Gestión deproductividad");
-      await expect(footerDescriptor).toHaveCSS("color", "rgb(255, 255, 255)");
-      const footerDivider = footer.locator(".logo-footer-divider");
-      await expect(footerDivider).toBeVisible();
-      await expect(footerDivider).toHaveCSS("width", "1px");
-      expect(
-        await footerDivider.evaluate((node) => getComputedStyle(node).backgroundImage),
-      ).toContain("linear-gradient");
+      await expect(footer.getByText(/Nit:? 901\.767\.156/i)).toBeVisible();
+      await expect(footer.getByLabel("Nombre", { exact: true })).toBeVisible();
+      const form = await footer.evaluate((node) => ({
+        background: getComputedStyle(node).backgroundColor,
+        fields: [...node.querySelectorAll("input:not([type='checkbox']), textarea")].map((field) => ({
+          placeholder: field.getAttribute("placeholder"),
+          border: getComputedStyle(field).borderRadius,
+          font: getComputedStyle(field).fontSize,
+        })),
+      }));
+      baseline ??= form;
+      expect(form, path).toEqual(baseline);
     }
   });
 

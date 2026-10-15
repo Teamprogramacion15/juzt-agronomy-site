@@ -37,6 +37,7 @@ export function Footer() {
           <div data-reveal-item>
             <h3>Contacto</h3>
             <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            <a href={`mailto:${contact.secondaryEmail}`}>{contact.secondaryEmail}</a>
             <a href={`tel:${contact.phoneRaw}`}>{contact.phoneDisplay}</a>
             <p>{contact.location}</p>
           </div>
@@ -46,9 +47,9 @@ export function Footer() {
             {nav.map((item) => (
               <Link key={item.label} href={item.href}>{item.label}</Link>
             ))}
-            <a href={contact.equipmentUrl} target="_blank" rel="noopener noreferrer">
+            <Link href="/equipos-e-insumos">
               Equipos e insumos ↗
-            </a>
+            </Link>
           </nav>
 
           <div data-reveal-item>
@@ -62,7 +63,7 @@ export function Footer() {
         </Reveal>
 
         <div className="footer-legal">
-          <p>{footerCopy.copyright}</p>
+          <p>{footerCopy.copyright} <a href={site.url}>www.juzt.com.co</a></p>
           <div>
             <Link href="/privacidad">Privacidad y datos</Link>
             <p>{site.credit}</p>

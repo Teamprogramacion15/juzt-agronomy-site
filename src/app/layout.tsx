@@ -1,45 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
-import localFont from "next/font/local";
 import { site } from "@/lib/content";
 import { getSiteUrl, organizationJsonLd } from "@/lib/seo";
 import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { HomeContact } from "@/components/sections/HomeContact";
+import { InteriorFooter } from "@/components/layout/InteriorFooter";
 import { AnalyticsConsent } from "@/components/layout/AnalyticsConsent";
 import { WhatsAppFloating } from "@/components/layout/WhatsAppFloating";
 import "./globals.css";
-
-const hanken = Hanken_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-hanken",
-  display: "swap",
-  weight: "variable",
-});
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  variable: "--font-plex-mono",
-  display: "swap",
-  weight: ["400", "500"],
-});
-
-const pitagon = localFont({
-  src: [
-    {
-      path: "./fonts/PitagonSerif-Variable.ttf",
-      weight: "100 900",
-      style: "normal",
-    },
-    {
-      path: "./fonts/PitagonSerif-VariableItalic.ttf",
-      weight: "100 900",
-      style: "italic",
-    },
-  ],
-  variable: "--font-pitagon",
-  display: "swap",
-  fallback: ["Georgia", "serif"],
-});
 
 const siteUrl = getSiteUrl();
 
@@ -101,15 +68,19 @@ export default function RootLayout({
       lang="es-CO"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${hanken.variable} ${plexMono.variable} ${pitagon.variable}`}
     >
+      <head>
+        <link rel="preload" href="/fonts/PitagonSans-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/PitagonSans-ExtraBold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://juztmaquinaria.lovable.app" />
+      </head>
       <body>
         <a href="#contenido" className="skip-link">
           Saltar al contenido
         </a>
         <Header />
         <main id="contenido">{children}</main>
-        <Footer />
+        <InteriorFooter><HomeContact /></InteriorFooter>
         <WhatsAppFloating />
         <AnalyticsConsent />
         <script

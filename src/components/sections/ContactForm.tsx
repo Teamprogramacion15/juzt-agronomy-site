@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { contactSchema, type ContactInput } from "@/lib/contact-schema";
+import type { ContactInput } from "@/lib/contact-schema";
 import { contact } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +14,7 @@ type Status =
 const fieldBase =
   "contact-field w-full rounded-[var(--radius-md)] border bg-[var(--color-bone)] px-4 py-3 text-[var(--color-ink)] outline-none transition-colors placeholder:text-[var(--color-mineral)] focus-visible:border-[var(--color-pine)] focus-visible:ring-2 focus-visible:ring-[var(--color-pine)]/20";
 
-export function ContactForm() {
+export function ContactForm({ referenceStyle = false, whatsapp = contact.whatsapp }: { referenceStyle?: boolean; whatsapp?: string }) {
   const [status, setStatus] = useState<Status>({ kind: "idle" });
 
   const {
@@ -24,7 +23,13 @@ export function ContactForm() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<ContactInput>({
-    resolver: zodResolver(contactSchema),
+    resolver: async (values, context, options) => {
+      const [{ zodResolver }, { contactSchema }] = await Promise.all([
+        import("@hookform/resolvers/zod"),
+        import("@/lib/contact-schema"),
+      ]);
+      return zodResolver(contactSchema)(values, context, options);
+    },
     mode: "onBlur",
   });
 
@@ -83,7 +88,7 @@ export function ContactForm() {
             o por{" "}
             <a
               className="text-[var(--color-pine)] underline decoration-[var(--color-clay)] underline-offset-4"
-              href={contact.whatsapp}
+              href={whatsapp}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -124,6 +129,7 @@ export function ContactForm() {
         >
           <input
             id="nombre"
+            placeholder={referenceStyle ? "Nombre" : undefined}
             type="text"
             autoComplete="name"
             aria-invalid={!!errors.nombre}
@@ -141,6 +147,7 @@ export function ContactForm() {
         >
           <input
             id="email"
+            placeholder={referenceStyle ? "E.mail" : undefined}
             type="email"
             autoComplete="email"
             aria-invalid={!!errors.email}
@@ -158,6 +165,7 @@ export function ContactForm() {
         >
           <input
             id="telefono"
+            placeholder={referenceStyle ? "Teléfono" : undefined}
             type="tel"
             autoComplete="tel"
             aria-invalid={!!errors.telefono}
@@ -170,6 +178,7 @@ export function ContactForm() {
         <Field label="País (opcional)" name="pais" error={errors.pais?.message} errId={errId("pais")}>
           <input
             id="pais"
+            placeholder={referenceStyle ? "País" : undefined}
             type="text"
             autoComplete="country-name"
             className={cn(fieldBase, "border-[var(--color-mineral-line)]")}
@@ -185,7 +194,7 @@ export function ContactForm() {
           aria-invalid={!!errors.mensaje}
           aria-describedby={errors.mensaje ? errId("mensaje") : undefined}
           className={cn(fieldBase, "contact-message resize-y", errors.mensaje ? "border-[var(--color-error)]" : "border-[var(--color-mineral-line)]")}
-          placeholder="Cuéntanos sobre tu proyecto, cultivo o necesidad."
+          placeholder={referenceStyle ? "Mensaje" : "Cuéntanos sobre tu proyecto, cultivo o necesidad."}
           {...register("mensaje")}
         />
       </Field>

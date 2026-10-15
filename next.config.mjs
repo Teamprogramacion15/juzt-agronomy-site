@@ -11,6 +11,12 @@ const nextConfig = {
   },
   async headers() {
     return [
+      // Public filenames are not hashed: revalidate after one hour rather than
+      // marking them immutable, so replacing an asset remains safe.
+      ...["/img/:path*", "/brand/:path*", "/fonts/:path*"].map((source) => ({
+        source,
+        headers: [{ key: "Cache-Control", value: "public, max-age=3600, stale-while-revalidate=86400" }],
+      })),
       {
         source: "/:path*",
         headers: [

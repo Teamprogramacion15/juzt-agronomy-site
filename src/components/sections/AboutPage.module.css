@@ -1,0 +1,54 @@
+.page { --u: min(calc(100vw / 1760), .92px); --content-width: min(83.33%, 1120px); padding-top: var(--header-h); color: #1b2148; font-family: 'Pitagon Sans Slide', Arial, sans-serif; }
+.page :is(h1,h2,p,ol) { margin: 0; }
+.hero { position: relative; }
+.hero > img { display: block; width: 100%; height: min(38vw, 800px); object-fit: cover; object-position: center 70%; }
+.hero::after { content: ''; position: absolute; inset: 0; background: rgba(13, 31, 49, .42); }
+.heroIdentity { position: absolute; z-index: 1; left: 50%; bottom: calc(90 * var(--u)); transform: translateX(-50%); width: var(--content-width); display: flex; justify-content: center; align-items: center; gap: clamp(30px, 4vw, 76px); }
+.heroIdentity h1 { flex: 0 0 auto; color: white; background: #2999d5; font-size: clamp(38px, 5vw, 90px); font-weight: 900; line-height: 1; padding: .05em .5em .12em; border-radius: 1em; letter-spacing: -.035em; }
+.heroBrand { flex: 0 0 auto; width: clamp(160px, 20vw, 340px); text-align: center; color: white; }
+.heroBrand img { display: block; width: 100%; height: auto; }
+.heroBrand p { margin-top: 4px; font-family: Arial, sans-serif; font-size: clamp(10px, 1.05vw, 20px); line-height: 1.2; white-space: nowrap; }
+.paper { display: flow-root; position: relative; background: #fafafa url('/img/reform/about-paper.webp') center / 100% auto repeat-y; padding-bottom: calc(55 * var(--u)); }
+.content { position: relative; width: var(--content-width); margin: calc(-50 * var(--u)) auto 0; padding: calc(65 * var(--u)) calc(27 * var(--u)) 0; border-radius: calc(65 * var(--u)) calc(65 * var(--u)) 0 0; background: #fafafa url('/img/reform/about-paper.webp') top center / 120% auto repeat-y; }
+.content h2 { font-size: clamp(32px, calc(60 * var(--u)), 55px); font-weight: 900; line-height: .88; letter-spacing: -.03em; }
+.content h2 span { color: #2999d5; }
+.content p, .content li { color: #777; font-size: clamp(16px, calc(20.5 * var(--u)), 19px); font-weight: 400; line-height: 1.28; letter-spacing: -.025em; }
+.content p { text-align: justify; }
+.purpose h2 { font-size: clamp(32px, calc(56.7 * var(--u)), 52px); }
+.purpose p { margin-top: calc(25 * var(--u)); }
+.purpose p + p { margin-top: calc(25 * var(--u)); }
+.differences, .phases, .accompaniment { background: radial-gradient(circle, #c7c7c7 1.6px, transparent 2px) top left / calc(14.5 * var(--u)) 5px repeat-x; }
+.differences { margin-top: calc(40 * var(--u)); padding-top: calc(56 * var(--u)); }
+.differences ol { list-style: decimal inside; padding-left: 0; margin-top: calc(20 * var(--u)); }
+.differences li { line-height: 1.65; padding-left: .08em; letter-spacing: -.045em; }
+.phases { margin-top: calc(55 * var(--u)); padding-top: calc(15 * var(--u)); }
+.phasesImage { display: block; width: 100%; height: auto; }
+.screenReader, .mobileHeading, .tableAccess { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.accompaniment { margin-top: calc(60 * var(--u)); padding-top: calc(40 * var(--u)); }
+.accompaniment p { margin-top: calc(30 * var(--u)); line-height: 1.38; }
+.signature { position: relative; display: flex; justify-content: center; align-items: center; margin-top: calc(44 * var(--u)); }
+.signature img { position: relative; width: calc(130 * var(--u)); height: auto; clip-path: inset(0 8%); }
+@media (max-width: 760px) {
+  .page { --u: 1px; --content-width: 92%; }
+  .hero > img { height: 250px; object-fit: cover; object-position: center 70%; }
+  .heroIdentity { bottom: 45px; gap: 20px; }
+  .heroIdentity h1 { font-size: clamp(28px, 7vw, 40px); }
+  .heroBrand { width: clamp(115px, 32vw, 180px); }
+  .heroBrand p { font-size: clamp(8px, 2.1vw, 12px); }
+  .content { width: 92%; margin-top: -26px; padding: 30px 5% 0; border-radius: 28px 28px 0 0; }
+  .content h2, .purpose h2 { font-size: clamp(28px, 6vw, 40px); line-height: .98; }
+  .content p, .content li { font-size: 16px; line-height: 1.4; letter-spacing: -.015em; }
+  .content p { text-align: left; }
+  .differences, .phases, .accompaniment { margin-top: 28px; padding-top: 26px; }
+  .differences li { margin-top: 10px; }
+  .phasesImage { display: none; }
+  .mobileHeading, .tableAccess { position: static; width: auto; height: auto; overflow: visible; clip-path: none; white-space: normal; }
+  .phasesTable { display: block; margin-top: 20px; }
+  .phasesTable thead { display: none; }
+  .phasesTable tbody, .phasesTable tr, .phasesTable th, .phasesTable td { display: block; }
+  .phasesTable tr { border-radius: 12px; padding: 16px; margin-top: 14px; background: #e9eff5; }
+  .phasesTable th { font-size: 18px; text-align: left; margin-bottom: 10px; }
+  .phasesTable td { font-size: 15px; line-height: 1.35; margin-top: 10px; }
+  .phasesTable td:last-child::before { content: 'Entregable: '; font-weight: 800; }
+  .signature img { width: 100px; }
+}

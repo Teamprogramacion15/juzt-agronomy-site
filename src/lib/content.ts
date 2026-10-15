@@ -23,6 +23,7 @@ export const site = {
 
 export const contact = {
   email: "gerencia@juzt.com.co",
+  secondaryEmail: "juztproductividad@gmail.com",
   phoneDisplay: "+57 311 334 1341",
   phoneRaw: "+573113341341",
   whatsapp:
@@ -45,13 +46,13 @@ export const social = [
   {
     label: "LinkedIn",
     handle: "Juzt Productividad",
-    href: "https://co.linkedin.com/company/juzt-productividad",
+    href: "https://www.linkedin.com/company/juzt-productividad/?originalSubdomain=co",
   },
 ] as const;
 
 export const nav = [
   { label: "Inicio", href: "/" },
-  { label: "Nosotros", href: "/#nosotros" },
+  { label: "Nosotros", href: "/nosotros" },
   { label: "Proyectos", href: "/proyectos" },
   { label: "Casos de éxito", href: "/casos-de-exito" },
   { label: "Contacto", href: "#contacto-footer" },
@@ -150,10 +151,11 @@ export const proyectos = [
 export const epsea = {
   code: "EPSEA",
   title: "Habilitación para prestar servicios de extensión agropecuaria",
-  resolution: "048",
-  date: "01 de marzo de 2024",
+  resolution: "número 187 de 2026",
   agency: "Agencia de Desarrollo Rural",
   agencyShort: "ADR",
+  documentTitle: "Resolución 187 de 2026 · Habilitación EPSEA JUZT",
+  documentHref: "/docs/resolucion-187-2026-epsea-juzt.pdf",
   body: "Esta habilitación respalda nuestra capacidad institucional para acompañar procesos de extensión agropecuaria con enfoque técnico, organizacional y territorial.",
 } as const;
 
@@ -250,7 +252,7 @@ export const casosDeExito = {
 export const footerCopy = {
   mission:
     "Estructuramos y ejecutamos proyectos, fortalecemos negocios y acompañamos decisiones estratégicas con conocimiento rural.",
-  copyright: `JUZT © 2026 · NIT ${site.nit}`,
+  copyright: "© 2026 Copyright:",
 } as const;
 
 export const aliados = [

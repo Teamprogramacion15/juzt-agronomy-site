@@ -1,0 +1,111 @@
+.slide {
+  position: relative;
+  height: 100%;
+  min-height: calc(100svh - var(--header-h) - 3rem);
+  overflow: hidden;
+  background: #fafafa url('/img/home-slide-2-texture.webp') center / cover no-repeat;
+  color: #1c2145;
+}
+
+/* The supplied 1051 × 477 reference defines the desktop composition. */
+.composition {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  aspect-ratio: 1051 / 477;
+  transform: translateY(-50%);
+  container-type: inline-size;
+  background: inherit;
+}
+
+.scene {
+  position: absolute;
+  left: -1.8%;
+  top: 11.5%;
+  width: 55.1%;
+  aspect-ratio: 4186 / 2633;
+  mix-blend-mode: multiply;
+}
+
+.sceneImage { object-fit: contain; }
+
+.copy {
+  position: absolute;
+  left: 56.7%;
+  top: 17%;
+  width: 39%;
+}
+
+.logo {
+  position: relative;
+  width: 9cqw;
+  height: 5.3cqw;
+  overflow: hidden;
+  mix-blend-mode: multiply;
+}
+
+.logo img {
+  position: absolute;
+  width: 18.6cqw;
+  height: auto;
+  max-width: none;
+  left: -.8cqw;
+  top: -.2cqw;
+}
+
+.heading {
+  margin-top: 1.95cqw;
+  font-family: 'Pitagon Sans Slide', Arial, sans-serif;
+  font-size: 5.02cqw;
+  font-weight: 900;
+  letter-spacing: -.035em;
+  line-height: .84;
+}
+
+.heading > span { display: block; white-space: nowrap; }
+.heading .firstLine { display: flex; align-items: baseline; gap: .65cqw; font-size: 4.76cqw; line-height: .98; }
+.firstLine > span { font-size: 2.66cqw; font-weight: 400; letter-spacing: -.045em; }
+.heading .blueLine { color: #216697; font-size: 4.76cqw; line-height: .92; }
+
+.description {
+  margin-top: 2.1cqw;
+  color: #999;
+  font: 400 1.285cqw/1.08 Arial, sans-serif;
+  letter-spacing: -.025em;
+}
+
+.description strong { font-weight: 700; }
+
+.catalogLink {
+  display: inline-flex;
+  align-items: center;
+  gap: .65cqw;
+  margin-top: 1.75cqw;
+  padding: .45cqw 1.25cqw;
+  border-radius: 999px;
+  background: #1c2145;
+  color: white;
+  font: 400 1.33cqw/1.15 Arial, sans-serif;
+  letter-spacing: -.035em;
+}
+
+.catalogLink span { font-size: 1.8cqw; line-height: .8; }
+.catalogLink:hover { background: #216697; }
+.catalogLink:focus-visible { outline: 2px solid #216697; outline-offset: 4px; }
+
+@media (max-width: 699px) {
+  .slide { min-height: 660px; }
+  .composition { position: relative; top: auto; aspect-ratio: auto; transform: none; padding: 22px 0 70px; }
+  .scene { position: relative; top: auto; left: -2%; width: 100%; }
+  .copy { position: relative; left: auto; top: auto; width: 86%; margin: -3cqw auto 0; }
+  .logo { width: 68px; height: 43px; }
+  .logo img { width: 140px; left: -6px; top: -2px; }
+  .heading { margin-top: 18px; font-size: 10.1cqw; }
+  .heading .firstLine, .heading .blueLine { font-size: 10.1cqw; }
+  .heading .firstLine { gap: 1.5cqw; }
+  .firstLine > span { font-size: 5.65cqw; }
+  .description { margin-top: 20px; font-size: 14px; line-height: 1.25; max-width: 360px; }
+  .desktopBreak { display: none; }
+  .catalogLink { margin-top: 18px; min-height: 40px; padding: 9px 16px; gap: 9px; font-size: 14px; }
+  .catalogLink span { font-size: 20px; }
+}
