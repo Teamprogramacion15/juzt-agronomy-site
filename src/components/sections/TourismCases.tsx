@@ -48,9 +48,19 @@ const cases: CaseItem[] = [
       { src: "/img/reform/conecta2-3.webp", alt: "Dinámica grupal al aire libre con participantes del proyecto" },
     ],
   },
-  ...[
-    "Jornada de asesoría de JUZT en una feria municipal",
-  ].map((alt, i) => ({ photo: `case-${i + 4}`, photoAlt: alt, title: "Título", text: placeholder })),
+  {
+    photo: "case-butica",
+    photoAlt: "Encuentro grupal de emprendedores con acompañamiento de JUZT en Buticá",
+    title: "Empresas con enfoque de género en Buticá (2026)",
+    place: "Corporación Mundial de la Mujer Medellín",
+    text: "Encuentros grupales y personalizados para consolidar el componente asociativo con enfoque de género.",
+    result: "Resultado: 12 empresas fortalecidas.",
+    gallery: [
+      { src: "/img/reform/butica-1.webp", alt: "Facilitador de JUZT explicando costos y gastos en un tablero" },
+      { src: "/img/reform/butica-2.webp", alt: "Participante tomando apuntes durante una sesión en el concejo municipal" },
+      { src: "/img/reform/butica-3.webp", alt: "Participante atento durante el encuentro de asociatividad" },
+    ],
+  },
 ];
 
 function Photo({ name, alt, sizes }: { name: string; alt: string; sizes: string }) {
