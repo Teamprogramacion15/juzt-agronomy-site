@@ -13,7 +13,7 @@ const cases: CaseItem[] = [
   {
     photo: "case-san-luis",
     photoAlt: "Técnico de JUZT y un productor junto a un hato de ganado en San Luis, Antioquia",
-    title: "Tecnificación ganadera en San Luis (2025)",
+    title: "Tecnificación ganadera en San Luis",
     place: "Municipio de San Luis, Antioquia",
     text: "Inseminación artificial a tiempo fijo, capacitación en buenas prácticas ganaderas, sistemas silvopastoriles y acompañamiento técnico en BPA y manejo integrado de plagas en el Oriente Antioqueño.",
     result: "Resultado: 43 unidades productivas ganaderas beneficiadas.",
@@ -26,7 +26,7 @@ const cases: CaseItem[] = [
   {
     photo: "case-abejorral-duo",
     photoAlt: "Emprendedora de Abejorral con su diploma de reconocimiento y funcionaria de la Alcaldía firmando un acta con una productora",
-    title: "Negocios verdes y rutas ecoturísticas en Abejorral (2026)",
+    title: "Negocios verdes y rutas ecoturísticas en Abejorral",
     place: "Municipio de Abejorral, Antioquia",
     text: "En el marco del convenio con CORNARE fortalecimos 5 negocios verdes y 2 rutas ecoturísticas con asesoría y entrega de equipos e insumos productivos.",
     result: "Resultado: 5 negocios verdes y 2 rutas ecoturísticas fortalecidos.",
@@ -37,7 +37,7 @@ const cases: CaseItem[] = [
   {
     photo: "case-conecta2",
     photoAlt: "Mesa de trabajo con participantes del proyecto CONECTA2 en un auditorio",
-    title: "Asociatividad y formalización – Proyecto CONECTA2 (2026)",
+    title: "Asociatividad y formalización – Proyecto CONECTA2",
     place: "Corporación Mundial de la Mujer Medellín",
     text: "Consultoría para fortalecer el ecosistema asociativo local en Bello, Santa Fe de Antioquia y Gómez Plata.",
     result: "Resultado: 32 empresas fortalecidas en asociatividad y formalización.",
@@ -51,7 +51,7 @@ const cases: CaseItem[] = [
   {
     photo: "case-butica-v2",
     photoAlt: "Participantes en una sesión de capacitación de JUZT con presentación en pantalla",
-    title: "Empresas con enfoque de género en Buticá (2026)",
+    title: "Empresas con enfoque de género en Buticá",
     place: "Corporación Mundial de la Mujer Medellín",
     text: "Encuentros grupales y personalizados para consolidar el componente asociativo con enfoque de género.",
     result: "Resultado: 12 empresas fortalecidas.",
@@ -65,7 +65,7 @@ const cases: CaseItem[] = [
   {
     photo: "case-launion",
     photoAlt: "Mujeres rurales de La Unión con el material entregado por JUZT",
-    title: "Seguridad y soberanía alimentaria en La Unión (2025)",
+    title: "Seguridad y soberanía alimentaria en La Unión",
     place: "Municipio de La Unión, Antioquia",
     text: "Suministro de insumos y plántulas a un grupo de mujeres rurales.",
     result: "Resultado: 40 mujeres beneficiadas.",
@@ -73,7 +73,7 @@ const cases: CaseItem[] = [
   {
     photo: "case-lactea",
     photoAlt: "Reunión de planeación estratégica con productores de la cadena láctea",
-    title: "Cadena láctea: CORPOLECHE y COOLESA (2024–2026)",
+    title: "Cadena láctea: CORPOLECHE y COOLESA",
     text: "Planeación estratégica, fortalecimiento asociativo y comercial, y capacitación para organizaciones de la cadena láctea.",
     result: "Resultado: 96 beneficiarios en CORPOLECHE y 62 en COOLESA.",
     galleryLayout: "wide",
