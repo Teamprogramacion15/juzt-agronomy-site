@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import { CaseCard, type CaseCardProps } from "./CaseCard";
 import styles from "./HomeReform.module.css";
 
-const asset = (name: string) => `/img/reform/${name}${name.startsWith("case-") ? "-hq" : ""}.webp`;
 const placeholder = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut";
 
 type CaseItem = Omit<CaseCardProps, "index" | "id">;
@@ -111,9 +110,6 @@ const cases: CaseItem[] = [
   },
 ];
 
-function Photo({ name, alt, sizes }: { name: string; alt: string; sizes: string }) {
-  return <Image src={asset(name)} alt={alt} fill sizes={sizes} quality={90} />;
-}
 function Arrow() { return <ArrowRight aria-hidden="true" strokeWidth={1.5} />; }
 
 export function TourismCases() {
@@ -121,7 +117,7 @@ export function TourismCases() {
     <MotionScene className={`${styles.reform} ${styles.tourismPage}`}>
       <section id="rutas-turismo" className={styles.cases} aria-labelledby="tourism-cases-title">
         <div className={styles.tourismHero}>
-          <Photo name="tourism" alt="Cascada rodeada de bosque y un arcoíris" sizes="100vw" />
+          <Image src="/img/reform/tourism-banner-hq.webp" alt="Cascada rodeada de bosque y un arcoíris" fill sizes="100vw" quality={100} priority />
           <div className={styles.tourismCopy} data-motion="title" data-motion-exit="true">
             <h1 id="tourism-cases-title">Experiencia que se siente<br />en el territorio</h1>
             <p className={styles.tourismSub}>Desde 2024 acompañamos a municipios, cooperativas, asociaciones y fundaciones de Antioquia y Boyacá en el fortalecimiento de sus organizaciones, la tecnificación de sus unidades productivas y la comercialización de lo que el campo produce.</p>

@@ -16,6 +16,6 @@ Los originales de referencia están en `../juzt_reforma/untitled folder`. La int
 
 La foto limpia de Nosotros tiene 1024×768 en la fuente; no se generan rostros ni se inventan detalles. Un original fotográfico de mayor resolución permitiría mejorar ese límite.
 
-El banner de Casos de éxito usa `/img/reform/tourism.webp`, la versión con la cascada. No sustituirla por la primera imagen embebida de `Home_9.pdf`, que no representa el banner completo. Las texturas usan `paper.webp`, `team-paper.webp`, `about-paper.webp` y `home-slide-2-texture.webp`, y los logos conservan los PNG/WebP anteriores.
+El banner de Casos de éxito usa `/img/reform/tourism-banner-hq.webp` (3840×1837, desde `Home_9-02.png` de 7946 px recortando el borde blanco inferior), la versión con la cascada; `tourism.webp` queda como respaldo antiguo. No sustituirla por la primera imagen embebida de `Home_9.pdf`, que no representa el banner completo. Las texturas usan `paper.webp`, `team-paper.webp`, `about-paper.webp` y `home-slide-2-texture.webp`, y los logos conservan los PNG/WebP anteriores.
 
 La configuración global de calidades de Next Image vuelve a `[75, 90, 100]`; solo las fotografías correspondientes seleccionan 100. No ampliar globalmente los tamaños de imagen para este pedido.
