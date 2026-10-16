@@ -471,8 +471,11 @@
 .caseGallery figure img { object-fit: cover; }
 .gallery3 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; aspect-ratio: 1 / 1; }
 .gallery3 figure:first-child { grid-row: 1 / span 2; }
-.gallery1, .gallery2 { grid-template-columns: 1fr; }
-.gallery1 figure, .gallery2 figure { aspect-ratio: 4 / 3; }
+.gallery1 { grid-template-columns: 1fr; }
+.gallery1 figure { aspect-ratio: 4 / 3; }
+.gallery2 { grid-template-columns: 1fr 1fr; align-items: start; }
+.gallery2 figure { aspect-ratio: 9 / 16; }
+.gallery2 figure:nth-child(2) { margin-top: 28px; }
 @media (max-width: 760px) {
   .caseDialogPanel { grid-template-columns: 1fr; padding: 22px 18px 24px; gap: 20px; border-radius: 22px; margin: 2vh auto; }
   .caseDialogBody h3 { font-size: 25px; }

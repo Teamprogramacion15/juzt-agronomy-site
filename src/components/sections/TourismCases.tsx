@@ -23,11 +23,22 @@ const cases: CaseItem[] = [
       { src: "/img/reform/san-luis-3.webp", alt: "Entrega de insumos silvopastoriles a una productora" },
     ],
   },
+  {
+    photo: "case-abejorral",
+    photoAlt: "Equipo de JUZT dictando una capacitación a emprendedores en Abejorral",
+    title: "Negocios verdes y rutas ecoturísticas en Abejorral (2026)",
+    place: "Municipio de Abejorral, Antioquia",
+    text: "En el marco del convenio con CORNARE fortalecimos 5 negocios verdes y 2 rutas ecoturísticas con asesoría y entrega de equipos e insumos productivos.",
+    result: "Resultado: 5 negocios verdes y 2 rutas ecoturísticas fortalecidos.",
+    gallery: [
+      { src: "/img/reform/abejorral-1.webp", alt: "Emprendedora de Abejorral con su diploma de reconocimiento y sus productos Eco SOS" },
+      { src: "/img/reform/abejorral-2.webp", alt: "Funcionaria de la Alcaldía firmando un acta con una productora en la feria municipal" },
+    ],
+  },
   ...[
-    "Representantes de JUZT y organizaciones aliadas en una feria",
     "Productores presentando los resultados de un proyecto",
     "Jornada de asesoría de JUZT en una feria municipal",
-  ].map((alt, i) => ({ photo: `case-${i + 2}`, photoAlt: alt, title: "Título", text: placeholder })),
+  ].map((alt, i) => ({ photo: `case-${i + 3}`, photoAlt: alt, title: "Título", text: placeholder })),
 ];
 
 function Photo({ name, alt, sizes }: { name: string; alt: string; sizes: string }) {
