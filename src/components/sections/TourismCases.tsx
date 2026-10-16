@@ -70,6 +70,18 @@ const cases: CaseItem[] = [
     text: "Suministro de insumos y plántulas a un grupo de mujeres rurales.",
     result: "Resultado: 40 mujeres beneficiadas.",
   },
+  {
+    photo: "case-lactea",
+    photoAlt: "Reunión de planeación estratégica con productores de la cadena láctea",
+    title: "Cadena láctea: CORPOLECHE y COOLESA (2024–2026)",
+    text: "Planeación estratégica, fortalecimiento asociativo y comercial, y capacitación para organizaciones de la cadena láctea.",
+    result: "Resultado: 96 beneficiarios en CORPOLECHE y 62 en COOLESA.",
+    galleryLayout: "wide",
+    gallery: [
+      { src: "/img/reform/lactea-1.webp", alt: "Productores de COOLESA posando frente al logotipo de la cooperativa" },
+      { src: "/img/reform/lactea-2.webp", alt: "Mesa de trabajo de acompañamiento estratégico y gerencial con productores lácteos" },
+    ],
+  },
 ];
 
 function Photo({ name, alt, sizes }: { name: string; alt: string; sizes: string }) {
