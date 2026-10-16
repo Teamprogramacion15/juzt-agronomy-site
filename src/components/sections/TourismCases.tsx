@@ -81,33 +81,6 @@ const cases: CaseItem[] = [
       { src: "/img/reform/lactea-2.webp", alt: "Mesa de trabajo de acompañamiento estratégico y gerencial con productores lácteos" },
     ],
   },
-  {
-    title: "Corporación Visos",
-    items: [
-      "Planeación estratégica y fortalecimiento organizacional",
-      "Fortalecimiento asociativo y comercial",
-      "Fortalecimiento de esquemas de economía solidaria",
-      "Cadena láctea",
-    ],
-    result: "Resultado: 116 beneficiarios.",
-  },
-  {
-    title: "Mercados de Oriente — PRODEPAZ",
-    items: [
-      "Fortalecimiento de cadenas de valor, comercialización y mercados solidarios",
-      "Fortalecimiento asociativo y comercial a organizaciones rurales del Oriente Antioqueño",
-    ],
-  },
-  {
-    title: "Cooperativa ALAGRO",
-    text: "Fortalecimiento organizacional, capacitación y asesoría empresarial rural.",
-    items: [
-      "Sector agropecuario regional",
-      "Fortalecimiento asociativo y comercial a organizaciones rurales",
-      "Acompañamiento técnico especializado",
-    ],
-    result: "Resultado: 125 beneficiarios directos.",
-  },
 ];
 
 function Arrow() { return <ArrowRight aria-hidden="true" strokeWidth={1.5} />; }
