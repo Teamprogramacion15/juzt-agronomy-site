@@ -9,7 +9,7 @@ portada institucional sobria y móvil primero, con páginas independientes para
 Proyectos y Casos de éxito. Todas las rutas comparten un footer de contacto con
 formulario, WhatsApp y datos corporativos.
 
-La identidad vigente usa los logotipos oficiales de JUZT, Pitagon Serif para
+La identidad vigente usa los logotipos oficiales de JUZT, Pitagon Sans Slide (cargada desde `public/fonts`) para
 titulares y la paleta `#192147`, `#1C609B`, `#FFFFFF` y `#EDEDED`.
 
 ## Stack y comandos

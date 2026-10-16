@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { HomeContact } from "./HomeContact";
 import styles from "./HomeReform.module.css";
 
-const asset = (name: string) => `/img/reform/${name.startsWith("ally-") ? `${name}.webp` : `${name.replace(/\.png$/, "")}-hq.webp`}`;
+const asset = (name: string) => `/img/reform/${name.replace(/\.png$/, "")}-hq.webp`;
 
 const allies = [
   { name: "Alcaldía de Abejorral", slug: "abejorral", width: 451 },

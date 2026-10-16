@@ -23,8 +23,8 @@ documento de respuestas. No deben sustituirse con contenido ficticio.
 - Logotipo principal y monograma oficiales en PNG transparente.
 - Paleta: azul noche `#192147`, azul institucional `#1C609B`, blanco `#FFFFFF`
   y gris `#EDEDED`.
-- Pitagon Serif variable, normal e itálica, alojada localmente mediante
-  `next/font/local` y licenciada bajo SIL Open Font License 1.1.
+- Tipografía Pitagon Sans Slide, alojada localmente en `public/fonts` y licenciada bajo
+  SIL Open Font License 1.1.
 
 ## Identidad y medios pendientes
 
