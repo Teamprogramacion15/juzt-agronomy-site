@@ -1,32 +1,37 @@
 import Image from "next/image";
 import { MotionScene } from "@/components/motion/MotionScene";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { CaseCard, type CaseCardProps } from "./CaseCard";
 import styles from "./HomeReform.module.css";
 
 const asset = (name: string) => `/img/reform/${name}${name.startsWith("case-") ? "-hq" : ""}.webp`;
 const placeholder = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut";
 
-type CaseItem = { photo: string; alt: string; title: string; place?: string; text: string; result?: string };
+type CaseItem = Omit<CaseCardProps, "index" | "id">;
 
 const cases: CaseItem[] = [
   {
     photo: "case-san-luis",
-    alt: "Técnico de JUZT y un productor junto a un hato de ganado en San Luis, Antioquia",
+    photoAlt: "Técnico de JUZT y un productor junto a un hato de ganado en San Luis, Antioquia",
     title: "Tecnificación ganadera en San Luis (2025)",
     place: "Municipio de San Luis, Antioquia",
     text: "Inseminación artificial a tiempo fijo, capacitación en buenas prácticas ganaderas, sistemas silvopastoriles y acompañamiento técnico en BPA y manejo integrado de plagas en el Oriente Antioqueño.",
     result: "Resultado: 43 unidades productivas ganaderas beneficiadas.",
+    gallery: [
+      { src: "/img/reform/san-luis-2.webp", alt: "Establo techado con ganado en una unidad productiva de San Luis" },
+      { src: "/img/reform/san-luis-1.webp", alt: "Productores y equipo técnico reunidos en una jornada de capacitación" },
+      { src: "/img/reform/san-luis-3.webp", alt: "Entrega de insumos silvopastoriles a una productora" },
+    ],
   },
   ...[
     "Representantes de JUZT y organizaciones aliadas en una feria",
     "Productores presentando los resultados de un proyecto",
     "Jornada de asesoría de JUZT en una feria municipal",
-  ].map((alt, i) => ({ photo: `case-${i + 2}`, alt, title: "Título", text: placeholder })),
+  ].map((alt, i) => ({ photo: `case-${i + 2}`, photoAlt: alt, title: "Título", text: placeholder })),
 ];
 
 function Photo({ name, alt, sizes }: { name: string; alt: string; sizes: string }) {
-  return <Image src={asset(name)} alt={alt} fill sizes={sizes} quality={name.startsWith("case-") ? 100 : 90} />;
+  return <Image src={asset(name)} alt={alt} fill sizes={sizes} quality={90} />;
 }
 function Arrow() { return <ArrowRight aria-hidden="true" strokeWidth={1.5} />; }
 
@@ -42,18 +47,7 @@ export function TourismCases() {
           </div>
         </div>
         <div id="historias-territorio" className={styles.caseGrid}>
-          {cases.map((c, i) => (
-            <article key={c.photo} className={styles.caseCard}>
-              <div className={styles.casePhoto} data-motion="image" data-motion-exit="true"><Photo name={c.photo} alt={c.alt} sizes="(max-width: 760px) 85vw, 36vw" /></div>
-              <div className={styles.caseCopy} data-motion="quiet" data-motion-delay="100">
-                <h3>{c.title}</h3>
-                {c.place && <p className={styles.caseMeta}>{c.place}</p>}
-                <p>{c.text}</p>
-                {c.result && <p className={styles.caseResult}>{c.result}</p>}
-                <Link href="/casos-de-exito" className={styles.blueLink} aria-label={`Conoce más sobre casos de éxito, fotografía ${i + 1}`}>Conoce más <Arrow /></Link>
-              </div>
-            </article>
-          ))}
+          {cases.map((c, i) => <CaseCard key={c.photo} id={c.photo} index={i} {...c} />)}
         </div>
       </section>
     </MotionScene>
