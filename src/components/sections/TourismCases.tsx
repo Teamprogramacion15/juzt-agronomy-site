@@ -128,6 +128,10 @@ export function TourismCases() {
           </div>
         </div>
         <div id="historias-territorio" className={styles.caseGrid}>
+          <header className={styles.caseIntro} data-motion="quiet">
+            <h2>Experiencia que se siente en el territorio</h2>
+            <p>Desde 2024 acompañamos a municipios, cooperativas, asociaciones y fundaciones de Antioquia y Boyacá en el fortalecimiento de sus organizaciones, la tecnificación de sus unidades productivas y la comercialización de lo que el campo produce.</p>
+          </header>
           {cases.map((c, i) => <CaseCard key={c.title} id={`caso-${i + 1}`} index={i} {...c} />)}
         </div>
       </section>
