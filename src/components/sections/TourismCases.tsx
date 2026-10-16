@@ -24,7 +24,7 @@ const cases: CaseItem[] = [
     ],
   },
   {
-    photo: "case-abejorral",
+    photo: "case-abejorral-duo",
     photoAlt: "Emprendedora de Abejorral con su diploma de reconocimiento y funcionaria de la Alcaldía firmando un acta con una productora",
     title: "Negocios verdes y rutas ecoturísticas en Abejorral (2026)",
     place: "Municipio de Abejorral, Antioquia",
