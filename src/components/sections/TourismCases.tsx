@@ -56,6 +56,7 @@ const cases: CaseItem[] = [
     text: "Encuentros grupales y personalizados para consolidar el componente asociativo con enfoque de género.",
     result: "Resultado: 12 empresas fortalecidas.",
     gallery: [
+      { src: "/img/reform/butica-4.webp", alt: "Sesión de capacitación grupal con participantes y equipo de JUZT en Buticá" },
       { src: "/img/reform/butica-1.webp", alt: "Facilitador de JUZT explicando costos y gastos en un tablero" },
       { src: "/img/reform/butica-2.webp", alt: "Participante tomando apuntes durante una sesión en el concejo municipal" },
       { src: "/img/reform/butica-3.webp", alt: "Participante atento durante el encuentro de asociatividad" },

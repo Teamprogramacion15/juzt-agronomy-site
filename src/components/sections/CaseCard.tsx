@@ -24,7 +24,7 @@ export function CaseCard({ id, photo, photoAlt, title, place, text, result, gall
   const dialogRef = useRef<HTMLDialogElement>(null);
   const hasDetail = Boolean(result || gallery.length);
   const titleId = `case-dialog-${id}`;
-  const galleryClass = gallery.length >= 3 ? (galleryLayout === "wide" ? styles.galleryWide3 : styles.gallery3) : gallery.length === 2 ? styles.gallery2 : styles.gallery1;
+  const galleryClass = gallery.length >= 4 ? styles.gallery4 : gallery.length >= 3 ? (galleryLayout === "wide" ? styles.galleryWide3 : styles.gallery3) : gallery.length === 2 ? styles.gallery2 : styles.gallery1;
 
   return (
     <article className={styles.caseCard}>
