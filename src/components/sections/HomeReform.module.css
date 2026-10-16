@@ -458,6 +458,7 @@
 .caseDialog { border: 0; padding: 0; background: transparent; max-width: none; max-height: none; width: 100%; height: 100%; overflow: auto; }
 .caseDialog::backdrop { background: rgba(25, 33, 71, .72); backdrop-filter: blur(3px); }
 .caseDialogPanel { position: relative; width: min(94vw, 1040px); margin: 4vh auto; background: #fff; border-radius: 28px; padding: 36px; display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 32px; align-items: start; box-shadow: 0 30px 80px rgba(0, 0, 0, .35); }
+.caseDialogPanelSolo { grid-template-columns: 1fr; width: min(94vw, 560px); }
 .caseDialogClose { position: absolute; top: 14px; right: 14px; z-index: 2; width: 42px; height: 42px; border-radius: 50%; border: 0; background: #192147; color: #fff; display: grid; place-items: center; cursor: pointer; }
 .caseDialogClose svg { width: 20px; height: 20px; }
 .caseDialogClose:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }

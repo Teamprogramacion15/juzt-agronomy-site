@@ -56,7 +56,7 @@ export function CaseCard({ id, photo, photoAlt, title, place, text, result, gall
             if (event.target === event.currentTarget) dialogRef.current?.close();
           }}
         >
-          <div className={styles.caseDialogPanel}>
+          <div className={`${styles.caseDialogPanel} ${gallery.length === 0 ? styles.caseDialogPanelSolo : ""}`}>
             <button type="button" className={styles.caseDialogClose} onClick={() => dialogRef.current?.close()} aria-label="Cerrar">
               <X aria-hidden="true" strokeWidth={1.8} />
             </button>
