@@ -99,6 +99,16 @@ const cases: CaseItem[] = [
       "Fortalecimiento asociativo y comercial a organizaciones rurales del Oriente Antioqueño",
     ],
   },
+  {
+    title: "Cooperativa ALAGRO",
+    text: "Fortalecimiento organizacional, capacitación y asesoría empresarial rural.",
+    items: [
+      "Sector agropecuario regional",
+      "Fortalecimiento asociativo y comercial a organizaciones rurales",
+      "Acompañamiento técnico especializado",
+    ],
+    result: "Resultado: 125 beneficiarios directos.",
+  },
 ];
 
 function Photo({ name, alt, sizes }: { name: string; alt: string; sizes: string }) {
