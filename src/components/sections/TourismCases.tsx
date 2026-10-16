@@ -101,7 +101,7 @@ export function TourismCases() {
           </div>
         </div>
         <div id="historias-territorio" className={styles.caseGrid}>
-          {cases.map((c, i) => <CaseCard key={c.photo} id={c.photo} index={i} {...c} />)}
+          {cases.map((c, i) => <CaseCard key={c.title} id={`caso-${i + 1}`} index={i} {...c} />)}
         </div>
       </section>
     </MotionScene>

@@ -2,15 +2,15 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight, ImageIcon, X } from "lucide-react";
 import styles from "./HomeReform.module.css";
 
 export type CaseGalleryImage = { src: string; alt: string };
 
 export type CaseCardProps = {
   id: string;
-  photo: string;
-  photoAlt: string;
+  photo?: string;
+  photoAlt?: string;
   title: string;
   place?: string;
   text?: string;
@@ -29,7 +29,13 @@ export function CaseCard({ id, photo, photoAlt, title, place, text, result, gall
   return (
     <article className={styles.caseCard}>
       <div className={styles.casePhoto} data-motion="image" data-motion-exit="true">
-        <Image src={`/img/reform/${photo}-hq.webp`} alt={photoAlt} fill sizes="(max-width: 760px) 85vw, 36vw" quality={100} />
+        {photo ? (
+          <Image src={`/img/reform/${photo}-hq.webp`} alt={photoAlt ?? title} fill sizes="(max-width: 760px) 85vw, 36vw" quality={100} />
+        ) : (
+          <div className={styles.casePhotoEmpty} role="img" aria-label="Imagen pendiente">
+            <ImageIcon aria-hidden="true" strokeWidth={1.2} />
+          </div>
+        )}
       </div>
       <div className={styles.caseCopy} data-motion="quiet" data-motion-delay="100">
         <h3>{title}</h3>
