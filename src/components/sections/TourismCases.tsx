@@ -62,6 +62,17 @@ const cases: CaseItem[] = [
       { src: "/img/reform/butica-3.webp", alt: "Participante atento durante el encuentro de asociatividad" },
     ],
   },
+  {
+    photo: "case-launion",
+    photoAlt: "Mujeres rurales de La Unión con el material entregado por JUZT",
+    title: "Seguridad y soberanía alimentaria en La Unión (2025)",
+    place: "Municipio de La Unión, Antioquia",
+    text: "Suministro de insumos y plántulas a un grupo de mujeres rurales.",
+    result: "Resultado: 40 mujeres beneficiadas.",
+    gallery: [
+      { src: "/img/reform/launion-1.webp", alt: "Punto de suministro de insumos agropecuarios con el pendón de JUZT" },
+    ],
+  },
 ];
 
 function Photo({ name, alt, sizes }: { name: string; alt: string; sizes: string }) {
