@@ -35,10 +35,23 @@ const cases: CaseItem[] = [
       { src: "/img/reform/abejorral-2.webp", alt: "Funcionaria de la Alcaldía firmando un acta con una productora en la feria municipal" },
     ],
   },
+  {
+    photo: "case-conecta2",
+    photoAlt: "Mesa de trabajo con participantes del proyecto CONECTA2 en un auditorio",
+    title: "Asociatividad y formalización – Proyecto CONECTA2 (2026)",
+    place: "Corporación Mundial de la Mujer Medellín",
+    text: "Consultoría para fortalecer el ecosistema asociativo local en Bello, Santa Fe de Antioquia y Gómez Plata.",
+    result: "Resultado: 32 empresas fortalecidas en asociatividad y formalización.",
+    galleryLayout: "wide",
+    gallery: [
+      { src: "/img/reform/conecta2-1.webp", alt: "Facilitador acompañando una mesa de trabajo de emprendedores" },
+      { src: "/img/reform/conecta2-2.webp", alt: "Taller de asociatividad con participantes en mesas de trabajo" },
+      { src: "/img/reform/conecta2-3.webp", alt: "Dinámica grupal al aire libre con participantes del proyecto" },
+    ],
+  },
   ...[
-    "Productores presentando los resultados de un proyecto",
     "Jornada de asesoría de JUZT en una feria municipal",
-  ].map((alt, i) => ({ photo: `case-${i + 3}`, photoAlt: alt, title: "Título", text: placeholder })),
+  ].map((alt, i) => ({ photo: `case-${i + 4}`, photoAlt: alt, title: "Título", text: placeholder })),
 ];
 
 function Photo({ name, alt, sizes }: { name: string; alt: string; sizes: string }) {

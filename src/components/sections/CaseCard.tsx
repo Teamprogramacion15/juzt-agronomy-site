@@ -16,14 +16,15 @@ export type CaseCardProps = {
   text?: string;
   result?: string;
   gallery?: CaseGalleryImage[];
+  galleryLayout?: "feature" | "wide";
   index: number;
 };
 
-export function CaseCard({ id, photo, photoAlt, title, place, text, result, gallery = [], index }: CaseCardProps) {
+export function CaseCard({ id, photo, photoAlt, title, place, text, result, gallery = [], galleryLayout = "feature", index }: CaseCardProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const hasDetail = Boolean(result || gallery.length);
   const titleId = `case-dialog-${id}`;
-  const galleryClass = gallery.length >= 3 ? styles.gallery3 : gallery.length === 2 ? styles.gallery2 : styles.gallery1;
+  const galleryClass = gallery.length >= 3 ? (galleryLayout === "wide" ? styles.galleryWide3 : styles.gallery3) : gallery.length === 2 ? styles.gallery2 : styles.gallery1;
 
   return (
     <article className={styles.caseCard}>

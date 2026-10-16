@@ -471,6 +471,9 @@
 .caseGallery figure img { object-fit: cover; }
 .gallery3 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; aspect-ratio: 1 / 1; }
 .gallery3 figure:first-child { grid-row: 1 / span 2; }
+.galleryWide3 { grid-template-columns: 1fr 1fr; }
+.galleryWide3 figure { aspect-ratio: 4 / 3; }
+.galleryWide3 figure:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
 .gallery1 { grid-template-columns: 1fr; }
 .gallery1 figure { aspect-ratio: 4 / 3; }
 .gallery2 { grid-template-columns: 1fr 1fr; align-items: start; }
