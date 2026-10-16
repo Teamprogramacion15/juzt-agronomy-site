@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import { CaseCard, type CaseCardProps } from "./CaseCard";
 import styles from "./HomeReform.module.css";
 
-const placeholder = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut";
 
 type CaseItem = Omit<CaseCardProps, "index" | "id">;
 

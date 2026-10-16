@@ -43,9 +43,6 @@
 .tag { display: inline-block; border: 1px solid currentColor; border-radius: calc(18 * var(--u)); font-size: calc(38 * var(--u)); padding: .12em .25em; line-height: 1.1; letter-spacing: -.025em; }
 .linesHeader h2 { font-size: calc(75 * var(--u)); line-height: .86; margin-top: calc(23 * var(--u)); }
 .linesHeader h2 span { color: #3c7bbe; }
-.circleLink { display: flex; align-items: center; justify-content: center; width: calc(52 * var(--u)); aspect-ratio: 1; background: white; color: var(--deep); border-radius: 50%; }
-.circleLink svg { width: 55%; height: 55%; stroke-width: 1.5; }
-.linesHeader .circleLink { position: absolute; right: calc(13 * var(--u)); bottom: calc(2 * var(--u)); }
 .lineGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(29 * var(--u)); margin-top: calc(68 * var(--u)); }
 .lineCard { background: #33457c; border-radius: calc(35 * var(--u)); padding: calc(24 * var(--u)); display: flex; flex-direction: column; gap: calc(14 * var(--u)); }
 .lineCard { transition: transform 320ms ease, box-shadow 320ms ease; }
@@ -86,45 +83,6 @@
 .allyLogo .allyColor { position: absolute; inset: 0; opacity: 0; transition: opacity .35s ease; }
 .allyGrid li:hover .allyLogo { transform: scale(1.18); }
 .allyGrid li:hover .allyColor { opacity: 1; }
-.servicePanel { height: 100%; }
-.serviceControls { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 14px 20px; color: white; }
-.serviceControls button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #ffffff60; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; transition: background 180ms; }
-.serviceControls button:hover { background: #ffffff20; }
-.serviceControls button:focus-visible { outline: 3px solid #d4af56; outline-offset: 3px; }
-.serviceControls svg { width: 20px; height: 20px; }
-.serviceDots { display: flex; gap: 2px; }
-.serviceDots button { border: 0; width: 36px; }
-.serviceDots span { width: 9px; height: 9px; border-radius: 50%; background: #ffffff60; }
-.serviceDots [aria-current='true'] span { background: var(--blue); box-shadow: 0 0 0 3px #2999d530; }
-.servicePanel { display: grid; position: relative; min-height: calc(806 * var(--u)); }
-.serviceCopy { align-self: center; padding: calc(85 * var(--u)) calc(64 * var(--u)) calc(65 * var(--u)) calc(110 * var(--u)); }
-.serviceCopy h1 { font-size: calc(75 * var(--u)); line-height: .85; }
-.serviceCopy h1 span { color: var(--blue); }
-.serviceCopy > p { font-size: calc(29 * var(--u)); letter-spacing: -.035em; line-height: .94; margin-top: calc(45 * var(--u)); }
-.includes { margin-top: calc(22 * var(--u)); padding-top: calc(22 * var(--u)); border-top: 4px dotted #d9d9d9; }
-.includes h3 { display: inline-block; color: white; background: var(--blue); font-size: calc(30 * var(--u)); font-weight: 900; padding: .08em .3em; border-radius: calc(6 * var(--u)); line-height: 1.05; }
-.includes p { font-size: calc(25 * var(--u)); line-height: 1.16; letter-spacing: -.05em; margin-top: calc(5 * var(--u)); }
-.servicePhoto { position: relative; min-width: 0; }
-.servicePhoto img { object-fit: cover; }
-.projectsPanel { grid-template-columns: 40.4% 59.6%; color: #737373; background: white; }
-.projectsPanel h1 { color: var(--deep); }
-.projectsPanel .servicePhoto img { object-position: 63% center; }
-.equipmentPanel { grid-template-columns: 49.4% 50.6%; background: var(--blue); color: white; }
-.equipmentPanel .serviceCopy { padding: calc(138 * var(--u)) calc(110 * var(--u)) calc(100 * var(--u)) calc(72 * var(--u)); }
-.equipmentPanel .serviceCopy h1 { font-size: calc(80 * var(--u)); }
-.equipmentPanel h1 span { color: var(--deep); }
-.equipmentPanel .servicePhoto img { object-position: center 50%; }
-.equipmentPanel .includes { border-color: #267dac; }
-.equipmentPanel .includes h3 { background: var(--deep); }
-.equipmentPanel .includes p { font-size: calc(28 * var(--u)); line-height: 1.05; }
-.financePanel { grid-template-columns: 45.15% 54.85%; background: var(--deep); color: white; min-height: calc(818 * var(--u)); }
-.financePanel .serviceCopy { padding-inline: calc(134 * var(--u)) calc(50 * var(--u)); }
-.financePanel .serviceCopy h1 { font-size: calc(100 * var(--u)); line-height: .86; }
-.financePanel .serviceCopy > p { font-size: calc(30 * var(--u)); line-height: 1.06; }
-.highlight { background: var(--blue); border-radius: calc(6 * var(--u)); padding: 0 .1em; }
-.financePanel .includes { border-color: #515578; }
-.financePanel .includes h3 { padding: 0; background: transparent; font-size: calc(56 * var(--u)); line-height: .9; }
-.financePanel .servicePhoto img { object-position: 57% center; }
 .contact { --u: clamp(.5px, .057vw, 1.08px); background: var(--deep); color: white; padding: calc(72 * var(--u)) 0 calc(70 * var(--u)); }
 .contactInner { width: 84.2%; max-width: 1400px; margin: auto; display: grid; grid-template-columns: 1.075fr 1fr; gap: calc(110 * var(--u)); }
 .contactLogo { width: calc(225 * var(--u)); height: calc(135 * var(--u)); object-fit: contain !important; object-position: left center; }
@@ -160,7 +118,7 @@
 .tourismHero::after { position: absolute; content: ''; inset: 0; background: #0003; }
 .tourismHero > img { object-position: center; }
 .tourismCopy { position: absolute; z-index: 1; left: 13.65%; top: calc(307 * var(--u)); }
-.tourismPage, .interiorPage { padding-top: 80px; }
+.tourismPage { padding-top: 80px; }
 .tourismCopy h1 { font-size: calc(90 * var(--u)); line-height: .84; text-shadow: 0 3px 6px #0008; }
 .tourismCopy > div { display: flex; align-items: center; gap: calc(167 * var(--u)); margin-top: calc(20 * var(--u)); }
 .tourismCopy p { background: var(--blue); font-size: calc(51 * var(--u)); line-height: 1; letter-spacing: -.045em; padding: .06em .4em .13em; border-radius: 99px; }
@@ -173,24 +131,13 @@
 .caseCopy p { color: #9d9d9d; font-size: calc(26 * var(--u)); line-height: .9; letter-spacing: -.05em; margin-top: calc(11 * var(--u)); }
 .blueLink { background: var(--blue); color: white; font-size: calc(16 * var(--u)); padding: .25em 1em; margin-top: calc(25 * var(--u)); }
 .blueLink svg { width: 1em; height: 1em; }
-.team { background: white var(--paper) center / cover; padding: calc(163 * var(--u)) 0 calc(153 * var(--u)); }
-.teamInner { width: 86.3%; max-width: 1645px; margin: auto; }
-.team header { position: relative; padding-inline: calc(12 * var(--u)); margin-bottom: calc(59 * var(--u)); }
-.team header h1 { color: var(--blue); font-size: calc(104 * var(--u)); line-height: 1; }
-.team header > p { color: #888; font-size: calc(35 * var(--u)); line-height: 1; letter-spacing: -.045em; margin-top: calc(13 * var(--u)); padding-right: calc(115 * var(--u)); }
-.team header .circleLink { position: absolute; right: calc(13 * var(--u)); bottom: calc(8 * var(--u)); background: var(--deep); color: white; }
-.teamGrid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: calc(46 * var(--u)) calc(23 * var(--u)); }
 .person { grid-column: span 2; position: relative; aspect-ratio: 339 / 502; background: #ededed; border-radius: calc(50 * var(--u)); overflow: hidden; }
 .person:nth-child(4) { grid-column: 2 / span 2; }
 .person > img { object-fit: contain; object-position: center bottom; }
 .person::after { content: ''; position: absolute; inset: 44% 0 0; background: linear-gradient(transparent, #1b2148 82%); }
-.personCopy { position: absolute; z-index: 1; bottom: calc(60 * var(--u)); left: 4%; right: 4%; text-align: center; }
-.personCopy h3 { font-size: calc(56 * var(--u)); font-weight: 900; line-height: 1; color: white; white-space: nowrap; }
 .person:nth-child(3) h3, .person:nth-child(5) h3 { font-size: calc(44 * var(--u)); }
-.personCopy p { display: flex; align-items: center; justify-content: center; gap: .25em; font-size: calc(25 * var(--u)); color: var(--blue); line-height: 1; letter-spacing: -.04em; }
-.personCopy p::before, .personCopy p::after { content: ''; width: 25%; height: 1px; background: #454666; }
 @media (min-width: 1908px) {
-  .introInner, .linesInner, .contactInner, .teamInner { width: calc(100% - 20rem); }
+  .introInner, .linesInner, .contactInner { width: calc(100% - 20rem); }
 }
 @media (max-width: 1000px) and (min-width: 761px) {
   .cardCopy > p:not(.lineLabel) { font-size: 12px; }
@@ -214,7 +161,6 @@
   .linesHeader { padding: 0; }
   .tag { font-size: 25px; border-radius: 12px; }
   .linesHeader h2 { font-size: clamp(34px, 8.2vw, 58px); margin-top: 22px; padding-right: 14px; }
-  .linesHeader .circleLink { position: static; margin-top: 24px; width: 40px; }
   .lineGrid { grid-template-columns: 1fr; gap: 24px; margin-top: 30px; }
   .lineCard { padding: 22px; gap: 15px; border-radius: 30px; }
   .cardCopy { min-height: 240px; padding: 20px 18px; }
@@ -230,19 +176,6 @@
   .allyViewport { width: 100%; margin-top: 30px; }
   .allyGrid li { padding-inline: 24px; }
   .allyGrid img { height: 62px; }
-  .servicePanel { grid-template-columns: 1fr; min-height: 0; }
-  .serviceCopy, .equipmentPanel .serviceCopy, .financePanel .serviceCopy { padding: 75px 7% 48px; }
-  .serviceCopy h1, .equipmentPanel .serviceCopy h1 { font-size: clamp(43px, 10vw, 72px); }
-  .serviceCopy > p, .financePanel .serviceCopy > p { font-size: 24px; line-height: 1.1; margin-top: 30px; }
-  .serviceCopy > p br { display: none; }
-  .includes { margin-top: 25px; padding-top: 20px; }
-  .includes h3 { font-size: 27px; }
-  .includes p, .equipmentPanel .includes p { font-size: 22px; line-height: 1.18; }
-  .servicePhoto { aspect-ratio: 1.15; }
-  .equipmentPanel .servicePhoto { order: 2; aspect-ratio: 1; }
-  .equipmentPanel .servicePhoto img { object-position: center 55%; }
-  .financePanel .serviceCopy h1 { font-size: clamp(50px, 11vw, 82px); }
-  .financePanel .includes h3 { font-size: clamp(35px, 8vw, 52px); }
   .contact { --u: 1px; padding: 42px 0; }
   .contactInner { width: 88%; grid-template-columns: 1fr; gap: 40px; }
   .contactLogo { width: 180px; height: 108px; }
@@ -271,42 +204,20 @@
   .caseCopy h3 { font-size: 35px; }
   .caseCopy p { font-size: 21px; line-height: 1.04; }
   .blueLink { font-size: 15px; margin-top: 20px; }
-  .team { padding: 60px 0; }
-  .teamInner { width: 88%; }
-  .team header { padding: 0; margin-bottom: 30px; }
-  .team header h1 { font-size: 62px; }
-  .team header > p { font-size: 22px; line-height: 1.1; padding-right: 0; }
-  .team header .circleLink { position: static; width: 40px; margin-top: 20px; }
-  .teamGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   .person { grid-column: auto; border-radius: 28px; }
   .person:nth-child(4) { grid-column: auto; }
   .person:last-child { grid-column: 1 / -1; width: calc(50% - 10px); justify-self: center; }
-  .personCopy { bottom: 25px; }
-  .personCopy h3, .person:nth-child(3) h3, .person:nth-child(5) h3 { font-size: clamp(20px, 3.9vw, 32px); }
-  .personCopy p { font-size: 18px; }
+  .person:nth-child(3) h3, .person:nth-child(5) h3 { font-size: clamp(20px, 3.9vw, 32px); }
 }
 @media (max-width: 520px) {
-  .teamGrid { grid-template-columns: 1fr; gap: 25px; }
   .person, .person:last-child { width: 100%; max-width: 360px; justify-self: center; }
-  .personCopy { bottom: 40px; }
-  .personCopy h3 { font-size: 42px; }
   .person:nth-child(3) h3, .person:nth-child(5) h3 { font-size: 33px; }
-  .personCopy p { font-size: 22px; }
 }
 /* Optical corrections from the first side-by-side comparison. */
 @media (min-width: 761px) {
   .linesHeader h2 { font-size: calc(68 * var(--u)); line-height: .84; margin-top: calc(15 * var(--u)); }
   .lineGrid { margin-top: calc(40 * var(--u)); }
   .cardPhoto { aspect-ratio: 339 / 230; }
-  .serviceCopy h1 { letter-spacing: -.015em; }
-  .projectsPanel .serviceCopy { padding-right: calc(60 * var(--u)); }
-  .projectsPanel .includes p { font-size: calc(24 * var(--u)); letter-spacing: -.06em; }
-  .projectsPanel .servicePhoto img { object-position: 80% center; }
-  .equipmentPanel .servicePhoto img { transform: scale(1.075); }
-  .equipmentPanel .servicePhoto { overflow: hidden; }
-  .financePanel .serviceCopy { padding-right: calc(25 * var(--u)); }
-  .financePanel .serviceCopy > p { font-size: calc(29 * var(--u)); letter-spacing: -.045em; }
-  .financePanel .servicePhoto img { object-position: 30% center; }
   .contactInner { grid-template-columns: 1.075fr 1fr; width: 84.9%; margin-left: 8.2%; }
   .directory { grid-template-columns: 1fr 1.03fr; }
   .directory > div:nth-child(2n) { padding-left: calc(26 * var(--u)); padding-right: 0; }
@@ -316,7 +227,7 @@
   .form :global(.contact-field) { font-weight: 400; }
   .form :global(.contact-submit) { font-weight: 400; }
 }
-.cases, .team { background-image: url('/img/reform/team-paper.webp'); }
+.cases { background-image: url('/img/reform/team-paper.webp'); }
 @media (prefers-reduced-motion: reduce) {
   .lineCard, .lineCard .cardPhoto img { transition: none; }
   .lineCard:is(:hover, :focus-visible), .lineCard:hover .cardPhoto img { transform: none; }
@@ -333,8 +244,8 @@
 }
 
 /* Balanced site scale. Keep body text readable independently of the artboard. */
-.intro, .lines, .allies, .contact, .team { padding-block: 64px; }
-.introInner, .linesInner, .contactInner, .teamInner {
+.intro, .lines, .allies, .contact { padding-block: 64px; }
+.introInner, .linesInner, .contactInner {
   width: min(88%, 1120px);
   margin-inline: auto;
 }
@@ -364,18 +275,6 @@
 .allyViewport { width: min(88%, 1120px); margin-top: 32px; }
 .allyGrid img { height: 58px; }
 .allyGrid li { padding-inline: 36px; }
-.servicePanel, .financePanel {
-  min-height: calc(100vh - var(--header-h));
-  min-height: calc(100svh - var(--header-h));
-  height: auto;
-}
-.serviceCopy, .projectsPanel .serviceCopy, .equipmentPanel .serviceCopy, .financePanel .serviceCopy { padding: 48px clamp(28px, 4vw, 64px); }
-.serviceCopy h1, .equipmentPanel .serviceCopy h1, .financePanel .serviceCopy h1 { font-size: clamp(36px, 3.8vw, 54px); line-height: 1.02; }
-.serviceCopy > p, .financePanel .serviceCopy > p { font-size: 18px; line-height: 1.4; letter-spacing: -.015em; margin-top: 28px; }
-.includes { margin-top: 20px; padding-top: 20px; border-top-width: 2px; }
-.includes h3 { font-size: 20px; }
-.includes p, .projectsPanel .includes p, .equipmentPanel .includes p { font-size: 17px; line-height: 1.45; letter-spacing: -.015em; margin-top: 8px; }
-.financePanel .includes h3 { font-size: clamp(26px, 2.6vw, 36px); line-height: 1.1; }
 .contactInner { gap: 56px; }
 .contactLogo { width: 160px; height: 96px; }
 .mission { font-size: 17px; line-height: 1.4; margin-top: 24px !important; }
@@ -390,7 +289,7 @@
 .form :global(.contact-field) { font-size: 16px; min-height: 46px; padding: 12px 18px; }
 .form :global(.contact-message) { height: 140px; min-height: 140px; border-radius: 22px; }
 .form :global(.contact-submit) { font-size: 16px; min-height: 44px; padding: 10px 22px; }
-.tourismPage, .interiorPage { padding-top: var(--header-h); }
+.tourismPage { padding-top: var(--header-h); }
 .cases { padding-bottom: 64px; }
 .tourismHero { height: 520px; }
 .tourismCopy { left: max(6%, calc((100% - 1120px) / 2)); right: 6%; top: 210px; }
@@ -403,15 +302,8 @@
 .caseCopy { padding: 18px 8px 0; }
 .caseCopy h3 { font-size: 27px; line-height: 1.1; }
 .caseCopy p { font-size: 17px; line-height: 1.4; letter-spacing: -.015em; }
-.teamInner { max-width: 1000px; }
-.team header { padding: 0; margin-bottom: 32px; }
-.team header h1 { font-size: clamp(36px, 4vw, 54px); line-height: 1.05; }
-.team header > p { font-size: 18px; line-height: 1.4; letter-spacing: -.015em; }
-.teamGrid { gap: 28px 24px; }
 .person { border-radius: 24px; }
-.personCopy { bottom: 28px; }
-.personCopy h3, .person:nth-child(3) h3, .person:nth-child(5) h3 { font-size: clamp(22px, 2.1vw, 28px); line-height: 1.1; }
-.personCopy p { font-size: 16px; line-height: 1.3; }
+.person:nth-child(3) h3, .person:nth-child(5) h3 { font-size: clamp(22px, 2.1vw, 28px); line-height: 1.1; }
 @media (min-width: 761px) and (max-width: 1000px) {
   .lineGrid { gap: 16px; }
   .lineCard { padding: 12px; }
@@ -422,7 +314,7 @@
   .directory > div:nth-child(2n) { padding-left: 8px; border-left: 0; }
 }
 @media (max-width: 760px) {
-  .intro, .lines, .allies, .contact, .team { padding-block: 44px; }
+  .intro, .lines, .allies, .contact { padding-block: 44px; }
   .allyGrid li { padding-inline: 22px; }
   .allyGrid img { height: 46px; }
   .introInner { gap: 24px; }
@@ -432,10 +324,6 @@
   .cardCopy, .equipmentCard .cardCopy { min-height: 0; }
   .cardCopy h3, .equipmentCard h3 { font-size: 27px; }
   .cardCopy > p:not(.lineLabel) { font-size: 15px; }
-  .serviceCopy, .projectsPanel .serviceCopy, .equipmentPanel .serviceCopy, .financePanel .serviceCopy { padding: 40px 6%; }
-  .serviceCopy h1, .equipmentPanel .serviceCopy h1, .financePanel .serviceCopy h1 { font-size: clamp(32px, 8vw, 42px); }
-  .serviceCopy > p, .financePanel .serviceCopy > p { font-size: 17px; margin-top: 24px; }
-  .includes p, .projectsPanel .includes p, .equipmentPanel .includes p { font-size: 16px; }
   .contactInner { gap: 32px; }
   .contactLogo { width: 145px; height: 87px; }
   .directory > div:nth-child(2n) { padding-left: 8px; }
@@ -445,10 +333,9 @@
   .tourismCopy p { font-size: 23px; }
   .caseGrid { width: 92%; padding: 20px 12px 0; margin-top: -40px !important; }
   .caseCopy h3 { font-size: 25px; }
-  .caseCopy p, .team header > p { font-size: 16px; }
+  .caseCopy p { font-size: 16px; }
   .person, .person:last-child { max-width: 280px; }
-  .personCopy h3, .person:nth-child(3) h3, .person:nth-child(5) h3 { font-size: 25px; }
-  .personCopy p { font-size: 16px; }
+  .person:nth-child(3) h3, .person:nth-child(5) h3 { font-size: 25px; }
 }
 
 .caseCopy .caseMeta { color: #1d609d; font-weight: 600; margin-top: 8px; }

@@ -338,10 +338,10 @@ test.describe("Nueva arquitectura JUZT 2026", () => {
 
     await page.goto("/casos-de-exito");
     expect(
-      await page.locator("#casos-en-construccion h1").evaluate((node) => getComputedStyle(node).fontFamily),
+      await page.locator("#rutas-turismo h1").evaluate((node) => getComputedStyle(node).fontFamily),
     ).toContain("Pitagon Sans Slide");
     expect(
-      await page.locator("#casos-en-construccion p").first().evaluate(
+      await page.locator("#rutas-turismo h1 + p").first().evaluate(
         (node) => getComputedStyle(node).fontFamily,
       ),
     ).toContain("Pitagon Sans Slide");
@@ -352,7 +352,7 @@ test.describe("Nueva arquitectura JUZT 2026", () => {
 
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/casos-de-exito");
-    await expect(page.locator("#casos-en-construccion h1")).toBeVisible();
+    await expect(page.locator("#rutas-turismo h1")).toBeVisible();
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -363,7 +363,7 @@ test.describe("Nueva arquitectura JUZT 2026", () => {
   test("mantiene el contenido visible cuando se reduce el movimiento", async ({ page }) => {
     for (const path of ["/", "/proyectos", "/casos-de-exito", "/privacidad"]) {
       await page.goto(path);
-      const reveals = page.locator(path === "/" ? "[data-home]" : path === "/casos-de-exito" ? "#casos-en-construccion" : path === "/proyectos" ? "#linea-proyectos" : "[data-motion-reveal]");
+      const reveals = page.locator(path === "/" ? "[data-home]" : path === "/casos-de-exito" ? "#rutas-turismo" : path === "/proyectos" ? "#linea-proyectos" : "[data-motion-reveal]");
       expect(await reveals.count()).toBeGreaterThan(0);
       expect(
         await reveals.evaluateAll((elements) =>
@@ -387,12 +387,22 @@ test.describe("Nueva arquitectura JUZT 2026", () => {
     await expect(page.locator("#linea-equipos h2")).toBeVisible();
   });
 
-  test("publica Casos de éxito como sección en construcción sin inventar testimonios", async ({ page }) => {
+  test("publica los casos de éxito con ventana de detalle", async ({ page }) => {
     await page.goto("/casos-de-exito");
 
-    await expect(page.getByRole("heading", { level: 1, name: /Estamos construyendo historias que dejan huella/i })).toBeVisible();
-    await expect(page.getByText("Sección en construcción")).toBeVisible();
-    await expect(page.locator("#casos-en-construccion article")).toHaveCount(0);
+    await expect(page.getByRole("heading", { level: 1, name: /Experiencia que se siente en el territorio/i })).toBeVisible();
+    await expect(page.locator("#historias-territorio article")).toHaveCount(6);
+
+    const card = page.locator("#historias-territorio article").first();
+    await expect(card.getByRole("heading", { level: 3 })).toContainText("Tecnificación ganadera en San Luis");
+    await expect(card.getByText("Resultado: 43 unidades productivas ganaderas beneficiadas.")).toBeHidden();
+
+    await card.getByRole("button", { name: /Conoce más sobre Tecnificación ganadera/i }).click();
+    const dialog = page.getByRole("dialog", { name: /Tecnificación ganadera en San Luis/i });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByText("Resultado: 43 unidades productivas ganaderas beneficiadas.")).toBeVisible();
+    await dialog.getByRole("button", { name: "Cerrar" }).click();
+    await expect(dialog).toBeHidden();
   });
 
   test("lleva un footer de contacto completo en cada página", async ({ page }) => {
