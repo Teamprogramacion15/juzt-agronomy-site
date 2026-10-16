@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/layout/Logo";
-import { TerrainFallback } from "@/components/three/TerrainFallback";
+import { TerrainFallback } from "@/components/ui/TerrainFallback";
 
 export const metadata: Metadata = {
   title: "Página no encontrada",
