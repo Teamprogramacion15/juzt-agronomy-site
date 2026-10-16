@@ -14,15 +14,16 @@ export type CaseCardProps = {
   title: string;
   place?: string;
   text?: string;
+  items?: string[];
   result?: string;
   gallery?: CaseGalleryImage[];
   galleryLayout?: "feature" | "wide";
   index: number;
 };
 
-export function CaseCard({ id, photo, photoAlt, title, place, text, result, gallery = [], galleryLayout = "feature", index }: CaseCardProps) {
+export function CaseCard({ id, photo, photoAlt, title, place, text, items = [], result, gallery = [], galleryLayout = "feature", index }: CaseCardProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const hasDetail = Boolean(result || gallery.length);
+  const hasDetail = Boolean(result || items.length || gallery.length);
   const titleId = `case-dialog-${id}`;
   const galleryClass = gallery.length >= 4 ? styles.gallery4 : gallery.length >= 3 ? (galleryLayout === "wide" ? styles.galleryWide3 : styles.gallery3) : gallery.length === 2 ? (galleryLayout === "wide" ? styles.galleryStack : styles.gallery2) : styles.gallery1;
 
@@ -72,6 +73,11 @@ export function CaseCard({ id, photo, photoAlt, title, place, text, result, gall
                 <h3 id={titleId}>{title}</h3>
               </header>
               {text && <p className={styles.caseDialogText}>{text}</p>}
+              {items.length > 0 && (
+                <ul className={styles.caseDialogList}>
+                  {items.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              )}
               {result && <p className={styles.caseDialogResult}>{result}</p>}
             </div>
             {gallery.length > 0 && (

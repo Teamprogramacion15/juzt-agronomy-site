@@ -468,6 +468,9 @@
 .caseDialogPlace { padding-right: 48px; color: var(--blue); font-weight: 600; font-size: 15px; letter-spacing: .04em; text-transform: uppercase; }
 .caseDialogBody h3 { color: #192147; font-size: 32px; line-height: 1.1; font-weight: 600; margin-top: 8px; padding-right: 40px; }
 .caseDialogText { color: #4a4f63; font-size: 17px; line-height: 1.6; margin: 0; }
+.caseDialogList { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.caseDialogList li { position: relative; padding-left: 22px; color: #4a4f63; font-size: 17px; line-height: 1.45; }
+.caseDialogList li::before { content: ""; position: absolute; left: 0; top: .5em; width: 9px; height: 9px; border-radius: 50%; background: var(--blue); }
 .caseDialogResult { margin: 0; padding: 16px 18px; border-left: 4px solid var(--blue); background: #eef4fa; border-radius: 0 14px 14px 0; color: #192147; font-weight: 600; font-size: 18px; line-height: 1.4; }
 .caseGallery { display: grid; gap: 12px; }
 .caseGallery figure { position: relative; margin: 0; overflow: hidden; border-radius: 16px; background: #e9ecf2; }

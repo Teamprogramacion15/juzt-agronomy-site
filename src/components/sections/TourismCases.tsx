@@ -82,6 +82,16 @@ const cases: CaseItem[] = [
       { src: "/img/reform/lactea-2.webp", alt: "Mesa de trabajo de acompañamiento estratégico y gerencial con productores lácteos" },
     ],
   },
+  {
+    title: "Corporación Visos",
+    items: [
+      "Planeación estratégica y fortalecimiento organizacional",
+      "Fortalecimiento asociativo y comercial",
+      "Fortalecimiento de esquemas de economía solidaria",
+      "Cadena láctea",
+    ],
+    result: "Resultado: 116 beneficiarios.",
+  },
 ];
 
 function Photo({ name, alt, sizes }: { name: string; alt: string; sizes: string }) {
