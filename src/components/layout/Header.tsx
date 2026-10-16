@@ -15,6 +15,10 @@ const homeNav = [
   { label: "Contactos", href: "#contacto-footer" },
 ] as const;
 
+// Absolute URLs (the equipment shop) open in a new tab and never replace the current page.
+const externalProps = (href: string) =>
+  /^https?:\/\//.test(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
+
 export function Header() {
   const pathname = usePathname();
   const router = useRouter();
@@ -139,7 +143,7 @@ export function Header() {
           <ul>
             {homeNav.map((item) => (
               <li key={item.label}>
-                <Link href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>
+                <Link href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined} {...externalProps(item.href)}>
                   {item.label}
                 </Link>
               </li>
@@ -175,6 +179,7 @@ export function Header() {
                 <Link
                     href={item.href}
                     onClick={closeMenu}
+                    {...externalProps(item.href)}
                   >
                     <span>{String(index + 1).padStart(2, "0")}</span>
                     {item.label}
