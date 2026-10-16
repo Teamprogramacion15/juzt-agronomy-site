@@ -25,14 +25,13 @@ const cases: CaseItem[] = [
   },
   {
     photo: "case-abejorral",
-    photoAlt: "Equipo de JUZT dictando una capacitación a emprendedores en Abejorral",
+    photoAlt: "Emprendedora de Abejorral con su diploma de reconocimiento y funcionaria de la Alcaldía firmando un acta con una productora",
     title: "Negocios verdes y rutas ecoturísticas en Abejorral (2026)",
     place: "Municipio de Abejorral, Antioquia",
     text: "En el marco del convenio con CORNARE fortalecimos 5 negocios verdes y 2 rutas ecoturísticas con asesoría y entrega de equipos e insumos productivos.",
     result: "Resultado: 5 negocios verdes y 2 rutas ecoturísticas fortalecidos.",
     gallery: [
-      { src: "/img/reform/abejorral-1.webp", alt: "Emprendedora de Abejorral con su diploma de reconocimiento y sus productos Eco SOS" },
-      { src: "/img/reform/abejorral-2.webp", alt: "Funcionaria de la Alcaldía firmando un acta con una productora en la feria municipal" },
+      { src: "/img/reform/abejorral-3.webp", alt: "Equipo de JUZT dictando una capacitación a emprendedores en Abejorral" },
     ],
   },
   {
