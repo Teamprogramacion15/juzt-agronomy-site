@@ -92,6 +92,13 @@ const cases: CaseItem[] = [
     ],
     result: "Resultado: 116 beneficiarios.",
   },
+  {
+    title: "Mercados de Oriente — PRODEPAZ",
+    items: [
+      "Fortalecimiento de cadenas de valor, comercialización y mercados solidarios",
+      "Fortalecimiento asociativo y comercial a organizaciones rurales del Oriente Antioqueño",
+    ],
+  },
 ];
 
 function Photo({ name, alt, sizes }: { name: string; alt: string; sizes: string }) {
