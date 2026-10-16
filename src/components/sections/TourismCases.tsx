@@ -7,6 +7,24 @@ import styles from "./HomeReform.module.css";
 const asset = (name: string) => `/img/reform/${name}${name.startsWith("case-") ? "-hq" : ""}.webp`;
 const placeholder = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut";
 
+type CaseItem = { photo: string; alt: string; title: string; place?: string; text: string; result?: string };
+
+const cases: CaseItem[] = [
+  {
+    photo: "case-san-luis",
+    alt: "Técnico de JUZT y un productor junto a un hato de ganado en San Luis, Antioquia",
+    title: "Tecnificación ganadera en San Luis (2025)",
+    place: "Municipio de San Luis, Antioquia",
+    text: "Inseminación artificial a tiempo fijo, capacitación en buenas prácticas ganaderas, sistemas silvopastoriles y acompañamiento técnico en BPA y manejo integrado de plagas en el Oriente Antioqueño.",
+    result: "Resultado: 43 unidades productivas ganaderas beneficiadas.",
+  },
+  ...[
+    "Representantes de JUZT y organizaciones aliadas en una feria",
+    "Productores presentando los resultados de un proyecto",
+    "Jornada de asesoría de JUZT en una feria municipal",
+  ].map((alt, i) => ({ photo: `case-${i + 2}`, alt, title: "Título", text: placeholder })),
+];
+
 function Photo({ name, alt, sizes }: { name: string; alt: string; sizes: string }) {
   return <Image src={asset(name)} alt={alt} fill sizes={sizes} quality={name.startsWith("case-") ? 100 : 90} />;
 }
@@ -24,10 +42,16 @@ export function TourismCases() {
           </div>
         </div>
         <div id="historias-territorio" className={styles.caseGrid}>
-          {["Encuentro de participantes de una iniciativa de turismo en territorio", "Representantes de JUZT y organizaciones aliadas en una feria", "Productores presentando los resultados de un proyecto", "Jornada de asesoría de JUZT en una feria municipal"].map((alt, i) => (
-            <article key={alt} className={styles.caseCard}>
-              <div className={styles.casePhoto} data-motion="image" data-motion-exit="true"><Photo name={`case-${i + 1}`} alt={alt} sizes="(max-width: 760px) 85vw, 36vw" /></div>
-              <div className={styles.caseCopy} data-motion="quiet" data-motion-delay="100"><h3>Título</h3><p>{placeholder}</p><Link href="/casos-de-exito" className={styles.blueLink} aria-label={`Conoce más sobre casos de éxito, fotografía ${i + 1}`}>Conoce más <Arrow /></Link></div>
+          {cases.map((c, i) => (
+            <article key={c.photo} className={styles.caseCard}>
+              <div className={styles.casePhoto} data-motion="image" data-motion-exit="true"><Photo name={c.photo} alt={c.alt} sizes="(max-width: 760px) 85vw, 36vw" /></div>
+              <div className={styles.caseCopy} data-motion="quiet" data-motion-delay="100">
+                <h3>{c.title}</h3>
+                {c.place && <p className={styles.caseMeta}>{c.place}</p>}
+                <p>{c.text}</p>
+                {c.result && <p className={styles.caseResult}>{c.result}</p>}
+                <Link href="/casos-de-exito" className={styles.blueLink} aria-label={`Conoce más sobre casos de éxito, fotografía ${i + 1}`}>Conoce más <Arrow /></Link>
+              </div>
             </article>
           ))}
         </div>

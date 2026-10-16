@@ -450,3 +450,6 @@
   .personCopy h3, .person:nth-child(3) h3, .person:nth-child(5) h3 { font-size: 25px; }
   .personCopy p { font-size: 16px; }
 }
+
+.caseCopy .caseMeta { color: #1d609d; font-weight: 600; margin-top: 8px; }
+.caseCopy .caseResult { color: #192147; font-weight: 600; margin-top: 10px; }
