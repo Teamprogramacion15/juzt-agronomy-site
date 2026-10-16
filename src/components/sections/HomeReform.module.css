@@ -455,9 +455,6 @@
 .caseCopy .blueLink { border: 0; cursor: pointer; font-family: inherit; }
 .caseCopy .blueLink:disabled { opacity: .55; cursor: default; }
 
-.caseIntro { grid-column: 1 / -1; text-align: center; max-width: 900px; margin: 0 auto; padding: 18px 0 14px; }
-.caseIntro h2 { color: #192147; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.1; font-weight: 600; margin: 0; }
-.caseIntro p { color: #4a4f63; font-size: clamp(16px, 1.35vw, 19px); line-height: 1.55; margin: 16px 0 0; }
 .casePhotoEmpty { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(135deg, #e8eef6, #d5e1ef); color: #8fa6c2; }
 .casePhotoEmpty svg { width: 18%; height: auto; max-width: 72px; }
 .caseDialog { border: 0; padding: 0; background: transparent; max-width: none; max-height: none; width: 100%; height: 100%; overflow: auto; }
@@ -499,3 +496,9 @@
   .caseDialogText { font-size: 16px; }
   .gallery3 { aspect-ratio: 4 / 5; }
 }
+
+.tourismCopy .tourismSub { background: none; border-radius: 0; padding: 0; max-width: 680px; margin-top: 18px; font-size: clamp(15px, 1.3vw, 19px); line-height: 1.5; letter-spacing: 0; font-weight: 500; text-shadow: 0 2px 6px #0009; }
+.tourismCopy > div { margin-top: 22px; }
+@media (min-width: 761px) { .tourismHero { height: 580px; } .tourismCopy { top: 190px; } }
+@media (max-width: 760px) { .tourismHero { height: 600px; } .tourismCopy { top: 105px; } .tourismCopy h1 { font-size: clamp(24px, 6.6vw, 44px); } }
+.tourismHero::after { background: #0005; }

@@ -123,15 +123,12 @@ export function TourismCases() {
         <div className={styles.tourismHero}>
           <Photo name="tourism" alt="Cascada rodeada de bosque y un arcoíris" sizes="100vw" />
           <div className={styles.tourismCopy} data-motion="title" data-motion-exit="true">
-            <h1 id="tourism-cases-title">Rutas del<br />Turismo Sostenible</h1>
-            <div><p>Negocios Verdes</p><a href="#historias-territorio" className={styles.whiteLink}>Conoce más <Arrow /></a></div>
+            <h1 id="tourism-cases-title">Experiencia que se siente<br />en el territorio</h1>
+            <p className={styles.tourismSub}>Desde 2024 acompañamos a municipios, cooperativas, asociaciones y fundaciones de Antioquia y Boyacá en el fortalecimiento de sus organizaciones, la tecnificación de sus unidades productivas y la comercialización de lo que el campo produce.</p>
+            <div><a href="#historias-territorio" className={styles.whiteLink}>Conoce más <Arrow /></a></div>
           </div>
         </div>
         <div id="historias-territorio" className={styles.caseGrid}>
-          <header className={styles.caseIntro} data-motion="quiet">
-            <h2>Experiencia que se siente en el territorio</h2>
-            <p>Desde 2024 acompañamos a municipios, cooperativas, asociaciones y fundaciones de Antioquia y Boyacá en el fortalecimiento de sus organizaciones, la tecnificación de sus unidades productivas y la comercialización de lo que el campo produce.</p>
-          </header>
           {cases.map((c, i) => <CaseCard key={c.title} id={`caso-${i + 1}`} index={i} {...c} />)}
         </div>
       </section>
