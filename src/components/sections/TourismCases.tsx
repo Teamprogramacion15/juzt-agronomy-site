@@ -49,8 +49,8 @@ const cases: CaseItem[] = [
     ],
   },
   {
-    photo: "case-butica",
-    photoAlt: "Encuentro grupal de emprendedores con acompañamiento de JUZT en Buticá",
+    photo: "case-butica-v2",
+    photoAlt: "Participantes en una sesión de capacitación de JUZT con presentación en pantalla",
     title: "Empresas con enfoque de género en Buticá (2026)",
     place: "Corporación Mundial de la Mujer Medellín",
     text: "Encuentros grupales y personalizados para consolidar el componente asociativo con enfoque de género.",
